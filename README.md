@@ -125,10 +125,10 @@ Inside the HelloDolphin folder you'll find the following items
 - run.bat
 - zz-ABOUT.txt
 
+#### After
+
 Now we want to copy the tage game engine folder into the directory
 (and into future assignment projects), so we'll have the following.
-
-#### After
 
 TAGE will be an engine that we will be modifying over time and will be
 different from initial copy and that of other classmates.
