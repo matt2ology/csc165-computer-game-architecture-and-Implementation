@@ -29,6 +29,11 @@ control for autonomous characters; simulation of physical phenomena; sound and
 music in games; optimization techniques; multi-player games and networking;
 game development tools and environments. Substantial programming and project work.
 
+## TAGE Goals
+
+1. Simple engine design
+2. [CSc-155 Advance Computer Graphics](https://catalog.csus.edu/courses-a-z/csc/) code style
+
 
 ## Setup/Installation (assumes Java 11 JDK and JOGL 2.4)
 
