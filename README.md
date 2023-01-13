@@ -83,3 +83,32 @@ javac tage\ai\behaviortrees\*.java
 javac tage\audio\*.java
 javac tage\audio\joal\*.java
 ```
+
+### Validate Your Setup Is In Proper Order
+
+Run `HelloDolphin.java` found in Canvas or [instructor's website](https://athena.ecs.csus.edu/~gordonvs/)
+
+Inside the HelloDolphin folder you'll find the following items
+
+#### Before
+
+- assets/
+- myGame/
+- compile.bat
+- run.bat
+- zz-ABOUT.txt
+
+Now we want to copy the tage game engine folder into the directory
+(and into future assignment projects), so we'll have the following.
+
+#### After
+
+TAGE will be an engine that we will be modifying over time and will be
+different from initial copy and that of other classmates.
+
+- assets/
+- myGame/
+- tage/
+- compile.bat
+- run.bat
+- zz-ABOUT.txt
