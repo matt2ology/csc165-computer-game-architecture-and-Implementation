@@ -6,6 +6,17 @@ Term Typically Offered: Spring only
 
 Days/Times: MoWeFr 2:00PM - 2:50PM
 
+- [CSC 165: Computer Game Architecture and Implementation](#csc-165-computer-game-architecture-and-implementation)
+  - [Description: Computer Game Architecture and Implementation (3 Units)](#description-computer-game-architecture-and-implementation-3-units)
+  - [Setup/Installation (assumes Java 11 JDK and JOGL 2.4)](#setupinstallation-assumes-java-11-jdk-and-jogl-24)
+    - [Operating System and Java](#operating-system-and-java)
+      - [3rd Party Library Dependency That TAGE Relies on](#3rd-party-library-dependency-that-tage-relies-on)
+      - [System Variable](#system-variable)
+    - [Compile TAGE](#compile-tage)
+    - [Validate Your Setup Is In Proper Order](#validate-your-setup-is-in-proper-order)
+      - [Before](#before)
+      - [After](#after)
+
 ## Description: Computer Game Architecture and Implementation (3 Units)
 
 Instructor: [Dr. V. Scott Gordon](https://www.amazon.com/stores/V.-Scott-Gordon/author/B01MU73557?ref=ap_rdr&store_ref=ap_rdr&isDramIntegrated=true&shoppingPortalEnabled=true)
