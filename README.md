@@ -51,7 +51,7 @@ and `Path` System variables.
 
 **Place the following libraries into your c-drive**: C:\\javagaming
 
-==Can get from RVR-5029 - root of c-drive - copy those 5 folders==
+**Can get from RVR-5029 - root of c-drive - copy those 5 folders**
 
 - Jbullet - Physics library
 - JOGL - Java wrapper for OpenGL
