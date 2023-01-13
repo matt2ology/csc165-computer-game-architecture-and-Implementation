@@ -38,7 +38,7 @@ game development tools and environments. Substantial programming and project wor
 
 ### Making your own game
 
-Follow the document, introGuide.pdf, provided in [tage_build.zip](tage-game-engine/tage_build.zip)
+Follow the document, introGuide.pdf, provided in [tage_build.zip](00-tage-game-engine/tage_build.zip)
 on page 2 where a template is provided.
 
 The game's java files go in the "myGame" folder (a generic name and can be named
@@ -60,7 +60,7 @@ Reboot your machine when all setup!
 
 Having these libraries downloaded is not sufficient and will require additional
 steps. We will need to add both the `CLASSPATH` and environmental `Paths` variable
-and can be found in the TAGE document: [tage_build.zip](tage-game-engine/tage_build.zip)
+and can be found in the TAGE document: [tage_build.zip](00-tage-game-engine/tage_build.zip)
 
 In the document follow the instructions and add items to the `CLASSPATH`
 and `Path` System variables.
@@ -90,7 +90,7 @@ If `CLASSPATH` System variable does not exist do the following:
 ### Compile TAGE
 
 Run the compileTAGE.bat located in the
-[tage_build.zip](tage-game-engine/tage_build.zip)
+[tage_build.zip](00-tage-game-engine/tage_build.zip)
 
 The file simply compiles the following java code:
 
