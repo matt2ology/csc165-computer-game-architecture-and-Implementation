@@ -21,11 +21,11 @@ Days/Times: MoWeFr 2:00PM - 2:50PM
 
 Instructor: [Dr. V. Scott Gordon](https://www.amazon.com/stores/V.-Scott-Gordon/author/B01MU73557?ref=ap_rdr&store_ref=ap_rdr&isDramIntegrated=true&shoppingPortalEnabled=true)
 
-Architecture and implementation of computer game systems. Topics include game engine architecture; screen 
-management and rendering control; geometric models; algorithms and data structures for spatial partitioning, 
-occlusion, and collision detection; real-time interactive 3D graphics and animation techniques; behavioral 
-control for autonomous characters; simulation of physical phenomena; sound and music in games; optimization 
-techniques; multi-player games and networking; game development tools and environments. Substantial 
+Architecture and implementation of computer game systems. Topics include game engine architecture; screen
+management and rendering control; geometric models; algorithms and data structures for spatial partitioning,
+occlusion, and collision detection; real-time interactive 3D graphics and animation techniques; behavioral
+control for autonomous characters; simulation of physical phenomena; sound and music in games; optimization
+techniques; multi-player games and networking; game development tools and environments. Substantial
 programming and project work.
 
 ## Setup/Installation (assumes Java 11 JDK and JOGL 2.4)
