@@ -16,3 +16,46 @@ occlusion, and collision detection; real-time interactive 3D graphics and animat
 control for autonomous characters; simulation of physical phenomena; sound and music in games; optimization 
 techniques; multi-player games and networking; game development tools and environments. Substantial 
 programming and project work.
+
+## Setup/Installation (assumes Java 11 JDK and JOGL 2.4)
+
+Reboot your machine when all setup!
+
+### Operating System and Java
+
+1. Need Windows 10
+2. Need Java SDK 11 (or JDK/SE) - Oracle
+3. Need a graphics card that supports OpenGL 4.3
+   1. [OpenGL Extensions Viewer](https://download.cnet.com/OpenGL-Extensions-Viewer/3000-18487_4-34442.html) - helps
+   2. Macs only go up to 4.1, so they are not capable with this course
+
+### 3rd Party Library Dependency That TAGE Relies on
+
+Having these libraries downloaded is not sufficient and will require additional
+steps. We will need to add both the `CLASSPATH` and environmental `Paths` variable
+and can be found in the TAGE document: [tage_build.zip](tage-game-engine/tage_build.zip)
+
+In the document follow the instructions and add items to the `CLASSPATH`
+and `Path` System variables.
+
+**Place the following libraries into your c-drive**: C:\\javagaming
+
+==Can get from RVR-5029 - root of c-drive - copy those 5 folders==
+
+- Jbullet - Physics library
+- JOGL - Java wrapper for OpenGL
+  - tricky to find on your own; for, the class uses a beta version
+  - Includes the JOLE library (Audio)
+- JOML - A math library specifically used for JOGL
+- Jinput - A library for input devices like gamepads
+- vecmath - Math library for animation code
+
+#### System Variable
+
+If `CLASSPATH` System variable does not exist do the following:
+
+1. Click "New..."
+2. Simply add a dot: `.`
+   1. As in current directory
+3. Enter and then add the rest according to the document specified in: introGuide.pdf
+   1. Jinput - include path lib into the `CLASSPATH` value: C:\\javagaming\\jinput\lib
