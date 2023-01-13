@@ -34,6 +34,13 @@ game development tools and environments. Substantial programming and project wor
 1. Simple engine design
 2. [CSc-155 Advance Computer Graphics](https://catalog.csus.edu/courses-a-z/csc/) code style
 
+### Making your own game
+
+Follow the document, introGuide.pdf, provided in [tage_build.zip](tage-game-engine/tage_build.zip)
+on page 2 where a template is provided.
+
+The game's java files go in the "myGame" folder (a generic name and can be named
+to your liking). The main.java file extends `VariableFrameRateGame`.
 
 ## Setup/Installation (assumes Java 11 JDK and JOGL 2.4)
 
