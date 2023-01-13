@@ -29,7 +29,7 @@ Reboot your machine when all setup!
    1. [OpenGL Extensions Viewer](https://download.cnet.com/OpenGL-Extensions-Viewer/3000-18487_4-34442.html) - helps
    2. Macs only go up to 4.1, so they are not capable with this course
 
-### 3rd Party Library Dependency That TAGE Relies on
+#### 3rd Party Library Dependency That TAGE Relies on
 
 Having these libraries downloaded is not sufficient and will require additional
 steps. We will need to add both the `CLASSPATH` and environmental `Paths` variable
@@ -60,7 +60,7 @@ If `CLASSPATH` System variable does not exist do the following:
 3. Enter and then add the rest according to the document specified in: introGuide.pdf
    1. Jinput - include path lib into the `CLASSPATH` value: C:\\javagaming\\jinput\lib
 
-## Compile TAGE
+### Compile TAGE
 
 Run the compileTAGE.bat located in the
 [tage_build.zip](tage-game-engine/tage_build.zip)
