@@ -59,3 +59,27 @@ If `CLASSPATH` System variable does not exist do the following:
    1. As in current directory
 3. Enter and then add the rest according to the document specified in: introGuide.pdf
    1. Jinput - include path lib into the `CLASSPATH` value: C:\\javagaming\\jinput\lib
+
+## Compile TAGE
+
+Run the compileTAGE.bat located in the
+[tage_build.zip](tage-game-engine/tage_build.zip)
+
+The file simply compiles the following java code:
+
+```bat
+javac tage\*.java
+javac tage\input\*.java
+javac tage\input\action\*.java
+javac tage\networking\*.java
+javac tage\networking\client\*.java
+javac tage\networking\server\*.java
+javac tage\nodeControllers\*.java
+javac tage\shapes\*.java
+javac tage\objectRenderers\*.java
+javac tage\physics\*.java
+javac tage\physics\JBullet\*.java
+javac tage\ai\behaviortrees\*.java
+javac tage\audio\*.java
+javac tage\audio\joal\*.java
+```
