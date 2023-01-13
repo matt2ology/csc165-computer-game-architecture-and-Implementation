@@ -8,6 +8,8 @@ Days/Times: MoWeFr 2:00PM - 2:50PM
 
 - [CSC 165: Computer Game Architecture and Implementation](#csc-165-computer-game-architecture-and-implementation)
   - [Description: Computer Game Architecture and Implementation (3 Units)](#description-computer-game-architecture-and-implementation-3-units)
+  - [TAGE Goals](#tage-goals)
+    - [Making your own game](#making-your-own-game)
   - [Setup/Installation (assumes Java 11 JDK and JOGL 2.4)](#setupinstallation-assumes-java-11-jdk-and-jogl-24)
     - [Operating System and Java](#operating-system-and-java)
       - [3rd Party Library Dependency That TAGE Relies on](#3rd-party-library-dependency-that-tage-relies-on)
