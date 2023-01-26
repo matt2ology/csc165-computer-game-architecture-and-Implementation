@@ -54,6 +54,9 @@ Reboot your machine when all setup!
 
 1. Need Windows 10
 2. Need Java SDK 11 (or JDK/SE) - Oracle
+
+    ![Java Version 11](_course_readme_assets/java_version_11.png)
+
 3. Need a graphics card that supports OpenGL 4.3
    1. [OpenGL Extensions Viewer](https://download.cnet.com/OpenGL-Extensions-Viewer/3000-18487_4-34442.html) - helps
    2. Macs only go up to 4.1, so they are not capable with this course
