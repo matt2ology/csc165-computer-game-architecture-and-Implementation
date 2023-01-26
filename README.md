@@ -13,11 +13,13 @@ Days/Times: MoWeFr 2:00PM - 2:50PM
   - [Setup/Installation (assumes Java 11 JDK and JOGL 2.4)](#setupinstallation-assumes-java-11-jdk-and-jogl-24)
     - [Operating System and Java](#operating-system-and-java)
       - [3rd Party Library Dependency That TAGE Relies on](#3rd-party-library-dependency-that-tage-relies-on)
-      - [System Variable](#system-variable)
+      - [System Variable Set-up](#system-variable-set-up)
+        - [`CLASSPATH` Environment Variable Set-up](#classpath-environment-variable-set-up)
+        - [`PATH` Environment Variable Set-up](#path-environment-variable-set-up)
     - [Compile TAGE](#compile-tage)
-    - [Validate Your Setup Is In Proper Order](#validate-your-setup-is-in-proper-order)
-      - [Before](#before)
-      - [After](#after)
+  - [DEMO "HELLO, TAGE": Validate Your Setup Is In Proper Order](#demo-hello-tage-validate-your-setup-is-in-proper-order)
+    - [Before](#before)
+    - [After](#after)
 
 ## Description: Computer Game Architecture and Implementation (3 Units)
 
@@ -65,7 +67,8 @@ and can be found in the TAGE document: [tage_build.zip](00-tage-game-engine/tage
 In the document follow the instructions and add items to the `CLASSPATH`
 and `Path` System variables.
 
-**Place the following libraries into your c-drive**: C:\\javagaming
+**Place the following libraries into your c-drive**:
+>C:\\javagaming
 
 **Can get from RVR-5029 - root of c-drive - copy those 5 folders**:
 
@@ -77,15 +80,26 @@ and `Path` System variables.
 - Jinput - A library for input devices like gamepads
 - vecmath - Math library for animation code
 
-#### System Variable
+#### System Variable Set-up
+
+##### `CLASSPATH` Environment Variable Set-up
 
 If `CLASSPATH` System variable does not exist do the following:
 
 1. Click "New..."
 2. Simply add a dot: `.`
    1. As in current directory
-3. Enter and then add the rest according to the document specified in: introGuide.pdf
-   1. Jinput - include path lib into the `CLASSPATH` value: C:\\javagaming\\jinput\lib
+3. Enter and then add the rest according to the document specified in: [introGuide.pdf](00-tage-game-engine/tage_build/introGuide.pdf)
+   1. Jinput - include path lib into the `CLASSPATH` value:
+      > C:\\javagaming\\jinput\lib
+
+![CLASSPATH ENVIRONMENT VARIABLES](_course_readme_assets/classpath_environment_variables.png)
+
+##### `PATH` Environment Variable Set-up
+
+Add `..\jinput\lib` to the `PATH` environment variable
+
+![PATH ENVIRONEMENT VARIABLE](_course_readme_assets/path_environment_variable.png)
 
 ### Compile TAGE
 
@@ -111,13 +125,13 @@ javac tage\audio\*.java
 javac tage\audio\joal\*.java
 ```
 
-### Validate Your Setup Is In Proper Order
+## DEMO "HELLO, TAGE": Validate Your Setup Is In Proper Order
 
 Run `HelloDolphin.java` found in Canvas or [instructor's website](https://athena.ecs.csus.edu/~gordonvs/)
 
 Inside the HelloDolphin folder you'll find the following items
 
-#### Before
+### Before
 
 - assets/
 - myGame/
@@ -125,9 +139,9 @@ Inside the HelloDolphin folder you'll find the following items
 - run.bat
 - zz-ABOUT.txt
 
-#### After
+### After
 
-Now we want to copy the tage game engine folder into the directory
+Now we want to **copy the tage game engine folder into the directory**
 (and into future assignment projects), so we'll have the following.
 
 TAGE will be an engine that we will be modifying over time and will be
