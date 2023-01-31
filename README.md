@@ -93,14 +93,25 @@ If `CLASSPATH` System variable does not exist do the following:
 2. Simply add a dot: `.`
    1. As in current directory
 3. Enter and then add the rest according to the document specified in: [introGuide.pdf](00-tage-game-engine/tage_build/introGuide.pdf)
-   1. Jinput - include path lib into the `CLASSPATH` value:
-      > C:\\javagaming\\jinput\lib
+
+```text
+C:\javagaming\jogl\jogl-all.jar
+C:\javagaming\jogl\gluegen-rt.jar
+C:\javagaming\jogl\joal.jar
+C:\javagaming\joml\joml-1.9.25.jar
+C:\javagaming\jinput\jinput.jar
+C:\javagaming\jbullet\jbullet.jar
+C:\javagaming\vecmath\vecmath.jar
+```
 
 ![CLASSPATH ENVIRONMENT VARIABLES](_course_readme_assets/classpath_environment_variables.png)
 
 ##### `PATH` Environment Variable Set-up
 
 Add `..\jinput\lib` to the `PATH` environment variable
+
+- Jinput - include path lib into the `PATH` value:
+  > C:\\javagaming\\jinput\lib
 
 ![PATH ENVIRONEMENT VARIABLE](_course_readme_assets/path_environment_variable.png)
 
