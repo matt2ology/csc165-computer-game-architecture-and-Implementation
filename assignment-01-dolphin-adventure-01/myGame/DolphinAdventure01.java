@@ -45,14 +45,15 @@ public class DolphinAdventure01 extends VariableFrameRateGame {
 
 	@Override
 	public void buildObjects() {
-		Matrix4f initialTranslation, initialScale;
+		Matrix4f initialTranslation_dolphin,
+				initialScale_dolphin,
 
 		// build dolphin in the center of the window
 		dolphin = new GameObject(GameObject.root(), dolphinShape, dolphinTexture);
-		initialTranslation = (new Matrix4f()).translation(0, 0, 0);
-		initialScale = (new Matrix4f()).scaling(3.0f);
-		dolphin.setLocalTranslation(initialTranslation);
-		dolphin.setLocalScale(initialScale);
+		initialTranslation_dolphin = (new Matrix4f()).translation(0, 0, 0);
+		initialScale_dolphin = (new Matrix4f()).scaling(3.0f);
+		dolphin.setLocalTranslation(initialTranslation_dolphin);
+		dolphin.setLocalScale(initialScale_dolphin);
 	}
 
 	@Override
