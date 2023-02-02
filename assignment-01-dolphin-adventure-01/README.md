@@ -19,6 +19,10 @@ far from the dolphin. The score is shown on a HUD (Heads-Up Display).
 
 ## Additional Assets Used
 
+### Brick/Cube
+
+66 high-res wall texture photos, including windows & doors - 2010-09-03_14-42-38.jpg: <https://opengameart.org/node/8484>
+
 ### Video Copilot's iPhone 5 Object and Textures
 
 Video Copilot: We create tools & training for people who love motion
