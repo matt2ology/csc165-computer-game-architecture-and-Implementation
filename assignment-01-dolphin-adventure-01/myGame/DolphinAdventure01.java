@@ -98,8 +98,10 @@ public class DolphinAdventure01 extends VariableFrameRateGame {
 	public void update() { // rotate dolphin if not paused
 		lastFrameTime = currentFrameTime;
 		currentFrameTime = System.currentTimeMillis();
-		if (!paused)
-			elapsedTime += (currentFrameTime - lastFrameTime) / 1000.0; // 1000.0 is needed to convert from milliseconds to seconds
+		if (!paused){
+			// 1000.0 is needed to convert from milliseconds to seconds
+			elapsedTime += (currentFrameTime - lastFrameTime) / 1000.0;
+		}
 		dolphin.setLocalRotation((new Matrix4f()).rotation((float) elapsedTime, 0, 1, 0));
 
 		// build and set HUD
