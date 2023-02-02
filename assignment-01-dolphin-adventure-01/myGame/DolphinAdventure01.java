@@ -22,6 +22,10 @@ public class DolphinAdventure01 extends VariableFrameRateGame {
 	private TextureImage dolphinTexture;
 	private Light light01;
 
+	private GameObject block;
+	private ObjShape blockShape;
+	private TextureImage blockTexture;
+
 	public DolphinAdventure01() {
 		super();
 	}
@@ -36,17 +40,21 @@ public class DolphinAdventure01 extends VariableFrameRateGame {
 	@Override
 	public void loadShapes() {
 		dolphinShape = new ImportedModel("dolphinHighPoly.obj");
+		blockShape = new Cube();
 	}
 
 	@Override
 	public void loadTextures() {
 		dolphinTexture = new TextureImage("Dolphin_HighPolyUV.png");
+		blockTexture = new TextureImage("blockTexture.jpg");
 	}
 
 	@Override
 	public void buildObjects() {
 		Matrix4f initialTranslation_dolphin,
 				initialScale_dolphin,
+				initialTranslation_block,
+				initialScale_block;
 
 		// build dolphin in the center of the window
 		dolphin = new GameObject(GameObject.root(), dolphinShape, dolphinTexture);
@@ -54,6 +62,14 @@ public class DolphinAdventure01 extends VariableFrameRateGame {
 		initialScale_dolphin = (new Matrix4f()).scaling(3.0f);
 		dolphin.setLocalTranslation(initialTranslation_dolphin);
 		dolphin.setLocalScale(initialScale_dolphin);
+
+		// build block
+		block = new GameObject(GameObject.root(), blockShape, blockTexture);
+		initialTranslation_block = (new Matrix4f()).translation(3, 0, 0);
+		initialScale_block = (new Matrix4f()).scaling(0.5f);
+		block.setLocalTranslation(initialTranslation_block);
+		block.setLocalScale(initialScale_block);
+
 	}
 
 	@Override
