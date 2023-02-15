@@ -1,4 +1,4 @@
-package myGame;
+package a1;
 
 import tage.*;
 import tage.shapes.*;
@@ -10,14 +10,17 @@ import java.io.*; // java.io is almost always needed for file input and output
 import javax.swing.*; // javax.swing is almost always needed for GUI elements 
 import org.joml.*; // org.joml is almost always needed for 3D math and transformations
 
-public class DolphinAdventure01 extends VariableFrameRateGame {
+public class myGame extends VariableFrameRateGame {
 	private static Engine engine;
 
 	private boolean paused = false;
 	private int counter = 0;
 	private double lastFrameTime, currentFrameTime, elapsedTime;
 
-	private GameObject dolphin;
+	private GameObject worldAxeX, worldAxeY, worldAxeZ;
+	private ObjShape worldLineX, worldLineY, worldLineZ;
+
+	private GameObject dol;
 	private ObjShape dolphinShape;
 	private TextureImage dolphinTexture;
 	private Light light01;
@@ -26,12 +29,12 @@ public class DolphinAdventure01 extends VariableFrameRateGame {
 	private ObjShape blockShape;
 	private TextureImage blockTexture;
 
-	public DolphinAdventure01() {
+	public myGame() {
 		super();
 	}
 
 	public static void main(String[] args) {
-		DolphinAdventure01 game = new DolphinAdventure01();
+		myGame game = new myGame();
 		engine = new Engine(game);
 		game.initializeSystem();
 		game.game_loop();
@@ -39,8 +42,22 @@ public class DolphinAdventure01 extends VariableFrameRateGame {
 
 	@Override
 	public void loadShapes() {
+		float lineLength = 10f;
+
 		dolphinShape = new ImportedModel("dolphinHighPoly.obj");
 		blockShape = new Cube();
+
+		// build world axes
+		worldLineX = new Line(
+				new Vector3f(0, 0, 0),
+				new Vector3f(lineLength, 0, 0));
+		worldLineY = new Line(
+				new Vector3f(0, 0, 0),
+				new Vector3f(0, lineLength, 0));
+		worldLineZ = new Line(
+				new Vector3f(0, 0, 0),
+				new Vector3f(0, 0, -lineLength));
+
 	}
 
 	@Override
@@ -56,12 +73,22 @@ public class DolphinAdventure01 extends VariableFrameRateGame {
 				initialTranslation_block,
 				initialScale_block;
 
+		// create world axes
+		worldAxeX = new GameObject(GameObject.root(), worldLineX);
+		worldAxeY = new GameObject(GameObject.root(), worldLineY);
+		worldAxeZ = new GameObject(GameObject.root(), worldLineZ);
+
+		// set world axes' colors
+		worldAxeX.getRenderStates().setColor(new Vector3f(1f, 0f, 0f));
+		worldAxeY.getRenderStates().setColor(new Vector3f(0f, 1f, 0f));
+		worldAxeZ.getRenderStates().setColor(new Vector3f(0f, 0f, 1f));
+
 		// build dolphin in the center of the window
-		dolphin = new GameObject(GameObject.root(), dolphinShape, dolphinTexture);
+		dol = new GameObject(GameObject.root(), dolphinShape, dolphinTexture);
 		initialTranslation_dolphin = (new Matrix4f()).translation(0, 0, 0);
 		initialScale_dolphin = (new Matrix4f()).scaling(3.0f);
-		dolphin.setLocalTranslation(initialTranslation_dolphin);
-		dolphin.setLocalScale(initialScale_dolphin);
+		dol.setLocalTranslation(initialTranslation_dolphin);
+		dol.setLocalScale(initialScale_dolphin);
 
 		// build block
 		block = new GameObject(GameObject.root(), blockShape, blockTexture);
@@ -98,12 +125,10 @@ public class DolphinAdventure01 extends VariableFrameRateGame {
 	public void update() { // rotate dolphin if not paused
 		lastFrameTime = currentFrameTime;
 		currentFrameTime = System.currentTimeMillis();
-		if (!paused){
+		if (!paused) {
 			// 1000.0 is needed to convert from milliseconds to seconds
 			elapsedTime += (currentFrameTime - lastFrameTime) / 1000.0;
 		}
-		// rotate dolphin around y-axis by elapsedTime seconds (in radians)
-		dolphin.setLocalRotation((new Matrix4f()).rotation((float) elapsedTime, 0, 1, 0));
 
 		// build and set HUD
 		int elapsedTimeSec = Math.round((float) elapsedTime);
@@ -119,22 +144,40 @@ public class DolphinAdventure01 extends VariableFrameRateGame {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+
+		Vector3f loc, fwd, up, right, newLocation;
+
+		Camera camera;
+
 		switch (e.getKeyCode()) {
-			case KeyEvent.VK_C:
-				counter++;
-				break;
 			case KeyEvent.VK_1:
 				paused = !paused;
 				break;
-			case KeyEvent.VK_2:
-				dolphin.getRenderStates().setWireframe(true);
+			case KeyEvent.VK_W: // move dolphin forward
+				fwd = dol.getWorldForwardVector();
+				loc = dol.getWorldLocation();
+				newLocation = loc.add(fwd.mul(0.2f));
+				dol.setLocalLocation(newLocation);
 				break;
-			case KeyEvent.VK_3:
-				dolphin.getRenderStates().setWireframe(false);
+			case KeyEvent.VK_S: // move dolphin backward
+				fwd = dol.getWorldForwardVector();
+				loc = dol.getWorldLocation();
+				newLocation = loc.add(fwd.mul(-0.2f));
+				dol.setLocalLocation(newLocation);
 				break;
-			case KeyEvent.VK_4:
-				(engine.getRenderSystem().getViewport("MAIN").getCamera())
-						.setLocation(new Vector3f(0, 0, 0));
+			case KeyEvent.VK_4: // view from dolphin's perspective
+				camera = (engine.getRenderSystem()
+						.getViewport("MAIN").getCamera());
+				loc = dol.getWorldLocation();
+				fwd = dol.getWorldForwardVector();
+				up = dol.getWorldUpVector();
+				right = dol.getWorldRightVector();
+				camera.setU(right);
+				camera.setV(up);
+				camera.setN(fwd);
+				camera.setLocation(
+						loc.add(up.mul(1.3f))
+								.add(fwd.mul(-2.5f)));
 				break;
 		}
 		super.keyPressed(e);
