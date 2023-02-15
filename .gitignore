@@ -29,4 +29,6 @@ assignment-01-dolphin-adventure-01/tage/
 hs_err_pid*
 replay_pid*
 
-
+# Ignore all docs folder in all subdirectories of the project
+# shell command $ javadoc -d docs/ $(find . -name *.java)
+*docs/
