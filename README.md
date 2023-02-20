@@ -34,8 +34,7 @@ music in games; optimization techniques; multi-player games and networking;
 game development tools and environments. Substantial programming and project work.
 
 ## Generate Javadocs
-
-`javadoc -d docs/ $(find . -name *.java)`
+WSL/Linux: $ `javadoc -d docs/ $(find . -name *.java)`
 
 ## TAGE Goals
 
