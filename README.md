@@ -33,6 +33,10 @@ control for autonomous characters; simulation of physical phenomena; sound and
 music in games; optimization techniques; multi-player games and networking;
 game development tools and environments. Substantial programming and project work.
 
+## Generate Javadocs
+
+`javadoc -d docs/ $(find . -name *.java)`
+
 ## TAGE Goals
 
 1. Simple engine design
