@@ -31,6 +31,20 @@ public class myGame extends VariableFrameRateGame {
 
 	public myGame() {
 		super();
+
+		System.out.println("\n--------------------------------------------------");
+		System.out.println("press ESC or Button 4 (Y) to quit");
+		// Controls!
+		System.out.println("press W or Left Joystick to move forward");
+		System.out.println("press S or Left Joystick to move backward");
+		System.out.println("press A or Left Joystick to move left");
+		System.out.println("press D or Left Joystick to move right");
+		System.out.println("press Q or Right Joystick to yaw left");
+		System.out.println("press E or Right Joystick to yaw right");
+		System.out.println("press UP or Right Joystick to pitch up");
+		System.out.println("press DOWN or Right Joystick to pitch down");
+		System.out.println("press SPACE or Button 2 (A) to hop on a nearby dolphin");
+		System.out.println("--------------------------------------------------");
 	}
 
 	public static void main(String[] args) {
