@@ -10,7 +10,7 @@ import java.io.*; // java.io is almost always needed for file input and output
 import javax.swing.*; // javax.swing is almost always needed for GUI elements 
 import org.joml.*; // org.joml is almost always needed for 3D math and transformations
 
-public class myGame extends VariableFrameRateGame {
+public class MyGame extends VariableFrameRateGame {
 	private static Engine engine;
 
 	private boolean paused = false;
@@ -29,7 +29,7 @@ public class myGame extends VariableFrameRateGame {
 	private ObjShape blockShape;
 	private TextureImage blockTexture;
 
-	public myGame() {
+	public MyGame() {
 		super();
 
 		System.out.println("\n--------------------------------------------------");
@@ -48,7 +48,7 @@ public class myGame extends VariableFrameRateGame {
 	}
 
 	public static void main(String[] args) {
-		myGame game = new myGame();
+		MyGame game = new MyGame();
 		engine = new Engine(game);
 		game.initializeSystem();
 		game.game_loop();
