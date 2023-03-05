@@ -2,7 +2,7 @@
 */tage_build
 
 ## Ignore first assignment TAGE
-assignment-01-dolphin-adventure-01/tage/
+!*/tage/
 
 # Compiled class file
 *.class
