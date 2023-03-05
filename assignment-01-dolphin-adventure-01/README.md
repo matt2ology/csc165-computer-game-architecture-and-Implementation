@@ -17,6 +17,10 @@ camera gets very close to the prize). This causes the prize to be collected,
 and the score incremented. The player (camera) is never allowed to stray too
 far from the dolphin. The score is shown on a HUD (Heads-Up Display).
 
+## Generate Javadocs
+
+`javadoc -d docs/ $(find . -name *.java)`
+
 ## Additional Assets Used
 
 ### Brick/Cube
