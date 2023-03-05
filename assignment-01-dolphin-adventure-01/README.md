@@ -25,7 +25,9 @@ far from the dolphin. The score is shown on a HUD (Heads-Up Display).
 
 ### Brick/Cube
 
-66 high-res wall texture photos, including windows & doors - 2010-09-03_14-42-38.jpg: <https://opengameart.org/node/8484>
+- 66 high-res wall texture photos, including windows & doors - 2010-09-03_14-42-38.jpg: <https://opengameart.org/node/8484>
+
+- Sac State logo: <https://www.csus.edu/brand/logos-logotypes.html>
 
 ### Video Copilot's iPhone 5 Object and Textures
 
