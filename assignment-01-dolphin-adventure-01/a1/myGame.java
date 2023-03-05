@@ -1,6 +1,7 @@
 package a1;
 
 import tage.*;
+import tage.input.InputManager; // tage.input is needed for input management (keyboard, mouse, gamepad, etc.)
 import tage.shapes.*;
 
 import java.lang.Math; // java.lang.Math is always needed for Math functions like sin, cos, etc.)
@@ -13,9 +14,7 @@ import org.joml.*; // org.joml is almost always needed for 3D math and transform
 public class MyGame extends VariableFrameRateGame {
 	private static Engine engine;
 
-	private boolean paused = false;
-	private int counter = 0;
-	private double lastFrameTime, currentFrameTime, elapsedTime;
+	private InputManager inputManager;
 
 	private GameObject worldAxeX, worldAxeY, worldAxeZ;
 	private ObjShape worldLineX, worldLineY, worldLineZ;
