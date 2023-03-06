@@ -1,15 +1,15 @@
 package a1;
 
-import tage.*;
-import tage.input.InputManager; // tage.input is needed for input management (keyboard, mouse, gamepad, etc.)
-import tage.shapes.*;
-
 import java.lang.Math; // java.lang.Math is always needed for Math functions like sin, cos, etc.)
 import java.awt.*; // java.awt is almost always needed for graphics and GUI elements
 import java.awt.event.*; // java.awt.event is almost always needed for keyboard and mouse events and listeners 
 import java.io.*; // java.io is almost always needed for file input and output
 import javax.swing.*; // javax.swing is almost always needed for GUI elements 
 import org.joml.*; // org.joml is almost always needed for 3D math and transformations
+
+import tage.*;
+import tage.input.InputManager; // tage.input is needed for input management (keyboard, mouse, gamepad, etc.)
+import tage.shapes.*;
 
 public class MyGame extends VariableFrameRateGame {
 	private static Engine engine;
