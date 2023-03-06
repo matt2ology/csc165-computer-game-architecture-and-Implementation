@@ -25,11 +25,16 @@ public class MyGame extends VariableFrameRateGame {
 	private int counter = 0;
 	private double lastFrameTime, currFrameTime, elapsTime;
 
+	/**
+	 * The camera is the "eye" of the player.
+	 */
+	private Camera cameraMain;
 	private GameObject avatar, // the avatar is the "main character" in the game
 			dol,
 			worldAxisX,
 			worldAxisY,
 			worldAxisZ;
+
 	private ObjShape dolS,
 			worldAxisLineShapeX,
 			worldAxisLineShapeY,
@@ -115,6 +120,10 @@ public class MyGame extends VariableFrameRateGame {
 
 	@Override
 	public void initializeGame() {
+		cameraMain = (engine.getRenderSystem()
+				.getViewport("MAIN")
+				.getCamera());
+
 		lastFrameTime = System.currentTimeMillis();
 		currFrameTime = System.currentTimeMillis();
 		elapsTime = 0.0;
@@ -123,10 +132,8 @@ public class MyGame extends VariableFrameRateGame {
 		setAvatar(dol); // The avatar is the object that the camera follows
 
 		// ------------- positioning the camera -------------
-		(engine.getRenderSystem()
-				.getViewport("MAIN")
-				.getCamera())
-				.setLocation(new Vector3f(0, 0, 5));
+		getCameraMain().setLocation(new Vector3f(0, 0, 5));
+
 	}
 
 	@Override
@@ -165,12 +172,24 @@ public class MyGame extends VariableFrameRateGame {
 			case KeyEvent.VK_3:
 				dol.getRenderStates().setWireframe(false);
 				break;
-			case KeyEvent.VK_4:
-				(engine.getRenderSystem().getViewport("MAIN").getCamera())
-						.setLocation(new Vector3f(0, 0, 0));
-				break;
 		}
 		super.keyPressed(e);
+	}
+
+	/**
+	 * @author Matt
+	 * @return The camera from the "MAIN" viewport
+	 */
+	public Camera getCameraMain() {
+		return cameraMain;
+	}
+
+	/**
+	 * @author Matt
+	 * @param cameraMain The camera to be update the "MAIN" viewport's camera
+	 */
+	public void updateCameraMain(Camera cameraMain) {
+		this.cameraMain = cameraMain;
 	}
 
 	/**
