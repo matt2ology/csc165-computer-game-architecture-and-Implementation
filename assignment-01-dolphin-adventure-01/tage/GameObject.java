@@ -148,13 +148,52 @@ public class GameObject
 		applyParentScaleToPosition = false;
 	}
 
-	// My own added methods
+	/**
+	 * Pitch the object along the right vector of the object by the specified
+	 * amount.
+	 * 
+	 * @param pitchSpeed the amount to pitch by
+	 * @author Matt
+	 */
+	public void pitch(float pitchSpeed) {
+		Matrix4f previousRotation = new Matrix4f(getWorldRotation());
+		Vector4f previousUpAngle = new Vector4f(1f, 0f, 0f, 0f)
+				.mul(previousRotation);
 
-	public void pitch() {
+		Matrix4f rotAroundAvatarUp = new Matrix4f().rotation(
+				pitchSpeed,
+				new Vector3f(
+						previousUpAngle.x(),
+						previousUpAngle.y(),
+						previousUpAngle.z()));
+
+		Matrix4f newRotation = previousRotation;
+		rotAroundAvatarUp.mul(newRotation);
+		setLocalRotation(rotAroundAvatarUp);
 	}
 
+	/**
+	 * Yaw the object around the up vector of the object
+	 * (not the world up vector) by the specified amount.
+	 * 
+	 * @param rotationSpeed the amount to rotate by
+	 * @author Matt
+	 */
+	public void yaw(float rotationSpeed) {
+		Matrix4f previousRotation = new Matrix4f(getWorldRotation());
+		Vector4f previousUpAngle = new Vector4f(0f, 1f, 0f, 1f)
+				.mul(previousRotation);
 
-	public void yaw() {
+		Matrix4f rotationAroundGameObjUpAngle;
+		rotationAroundGameObjUpAngle = new Matrix4f().rotation(
+				rotationSpeed, new Vector3f(
+						previousUpAngle.x(),
+						previousUpAngle.y(),
+						previousUpAngle.z()));
+
+		Matrix4f newRotation = previousRotation;
+		rotationAroundGameObjUpAngle.mul(newRotation);
+		setLocalRotation(rotationAroundGameObjUpAngle);
 	}
 
 	// ---------------------------------------------------
