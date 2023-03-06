@@ -16,6 +16,11 @@ public class MyGame extends VariableFrameRateGame {
 
 	private InputManager inputManager;
 
+	/**
+	 * photomode and/or freecam/flycam mode
+	 * - if true, the camera is not attached to the avatar
+	 */
+	private boolean freeCam = false;
 	private boolean paused = false;
 	private int counter = 0;
 	private double lastFrameTime, currFrameTime, elapsTime;
@@ -47,6 +52,7 @@ public class MyGame extends VariableFrameRateGame {
 		System.out.println("press DOWN or Right Joystick to pitch down");
 		System.out.println("press SPACE or Button 2 (A) to hop on a nearby dolphin");
 		System.out.println("--------------------------------------------------");
+		System.err.println("FreeCam mode is " + (isFreeCam() ? "ON" : "OFF"));
 	}
 
 	public static void main(String[] args) {
@@ -163,4 +169,22 @@ public class MyGame extends VariableFrameRateGame {
 		}
 		super.keyPressed(e);
 	}
+
+	/**
+	 * @author Matt
+	 * @return the freeCam boolean value (true or false)
+	 */
+	public boolean isFreeCam() {
+		return freeCam;
+	}
+
+	/**
+	 * @author Matt
+	 *         Toggles the freeCam boolean value to true or false
+	 */
+	public void toggleFreeCam() {
+		this.freeCam = !freeCam;
+		System.err.println("freeCam = " + freeCam);
+	}
+
 }
