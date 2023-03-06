@@ -134,6 +134,25 @@ public class MyGame extends VariableFrameRateGame {
 		// ------------- positioning the camera -------------
 		getCameraMain().setLocation(new Vector3f(0, 0, 5));
 
+		// ------------- Control Inputs -------------
+		inputManager = engine.getInputManager();
+		MoveActionForward moveForward = new MoveActionForward(this);
+		MoveActionBackward moveBackward = new MoveActionBackward(this);
+		InteractAvatar interactAvatar = new InteractAvatar(this);
+		inputManager.associateActionWithAllKeyboards(
+				net.java.games.input.Component.Identifier.Key.W,
+				moveForward,
+				InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
+
+		inputManager.associateActionWithAllKeyboards(
+				net.java.games.input.Component.Identifier.Key.S,
+				moveBackward,
+				InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
+
+		inputManager.associateActionWithAllKeyboards(
+				net.java.games.input.Component.Identifier.Key.SPACE,
+				interactAvatar,
+				InputManager.INPUT_ACTION_TYPE.ON_PRESS_ONLY);
 	}
 
 	@Override
@@ -155,6 +174,8 @@ public class MyGame extends VariableFrameRateGame {
 		Vector3f hud2Color = new Vector3f(0, 0, 1);
 		(engine.getHUDmanager()).setHUD1(dispStr1, hud1Color, 15, 15);
 		(engine.getHUDmanager()).setHUD2(dispStr2, hud2Color, 500, 15);
+
+		inputManager.update((float) elapsTime); // Continuously read user's input
 	}
 
 	@Override
