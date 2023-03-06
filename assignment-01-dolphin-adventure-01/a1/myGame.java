@@ -25,7 +25,8 @@ public class MyGame extends VariableFrameRateGame {
 	private int counter = 0;
 	private double lastFrameTime, currFrameTime, elapsTime;
 
-	private GameObject dol,
+	private GameObject avatar, // the avatar is the "main character" in the game
+			dol,
 			worldAxisX,
 			worldAxisY,
 			worldAxisZ;
@@ -119,6 +120,8 @@ public class MyGame extends VariableFrameRateGame {
 		elapsTime = 0.0;
 		(engine.getRenderSystem()).setWindowDimensions(1900, 1000);
 
+		setAvatar(dol); // The avatar is the object that the camera follows
+
 		// ------------- positioning the camera -------------
 		(engine.getRenderSystem()
 				.getViewport("MAIN")
@@ -187,4 +190,19 @@ public class MyGame extends VariableFrameRateGame {
 		System.err.println("freeCam = " + freeCam);
 	}
 
+	/**
+	 * @author Matt
+	 * @return the avatar GameObject (the "player"/"main character")
+	 */
+	public GameObject getAvatar() {
+		return avatar;
+	}
+
+	/**
+	 * @author Matt
+	 * @param avatar GameObject to be set as the avatar: "player"/"main character"
+	 */
+	public void setAvatar(GameObject avatar) {
+		this.avatar = avatar;
+	}
 }
