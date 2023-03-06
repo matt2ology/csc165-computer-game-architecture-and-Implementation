@@ -20,8 +20,14 @@ public class MyGame extends VariableFrameRateGame {
 	private int counter = 0;
 	private double lastFrameTime, currFrameTime, elapsTime;
 
-	private GameObject dol;
-	private ObjShape dolS;
+	private GameObject dol,
+			worldAxisX,
+			worldAxisY,
+			worldAxisZ;
+	private ObjShape dolS,
+			worldAxisLineShapeX,
+			worldAxisLineShapeY,
+			worldAxisLineShapeZ;
 	private TextureImage doltx;
 	private Light light1;
 
@@ -52,7 +58,17 @@ public class MyGame extends VariableFrameRateGame {
 
 	@Override
 	public void loadShapes() {
+		float lineLength = 5.0f;
+		Vector3f worldOrigin = new Vector3f(0f, 0f, 0f);
+		Vector3f lineX = new Vector3f(lineLength, 0f, 0f);
+		Vector3f lineY = new Vector3f(0f, lineLength, 0f);
+		Vector3f lineZ = new Vector3f(0f, 0f, -lineLength);
+
 		dolS = new ImportedModel("dolphinHighPoly.obj");
+
+		worldAxisLineShapeX = new Line(worldOrigin, lineX);
+		worldAxisLineShapeY = new Line(worldOrigin, lineY);
+		worldAxisLineShapeZ = new Line(worldOrigin, lineZ);
 	}
 
 	@Override
@@ -70,6 +86,16 @@ public class MyGame extends VariableFrameRateGame {
 		initialScale = (new Matrix4f()).scaling(3.0f);
 		dol.setLocalTranslation(initialTranslation);
 		dol.setLocalScale(initialScale);
+
+		// Build World Axis
+		worldAxisX = new GameObject(GameObject.root(), worldAxisLineShapeX);
+		worldAxisY = new GameObject(GameObject.root(), worldAxisLineShapeY);
+		worldAxisZ = new GameObject(GameObject.root(), worldAxisLineShapeZ);
+
+		// Set world axis colors
+		worldAxisX.getRenderStates().setColor(new Vector3f(1f, 0, 0));
+		worldAxisY.getRenderStates().setColor(new Vector3f(0, 1f, 0));
+		worldAxisZ.getRenderStates().setColor(new Vector3f(0, 0, 1f));
 	}
 
 	@Override
