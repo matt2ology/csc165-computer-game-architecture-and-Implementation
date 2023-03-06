@@ -128,7 +128,6 @@ public class MyGame extends VariableFrameRateGame {
 			// 1000.0 is needed to convert from milliseconds to seconds
 			elapsTime += (currFrameTime - lastFrameTime) / 1000.0;
 		}
-		dol.setLocalRotation((new Matrix4f()).rotation((float) elapsTime, 0, 1, 0));
 
 		// build and set HUD
 		int elapsTimeSec = Math.round((float) elapsTime);
