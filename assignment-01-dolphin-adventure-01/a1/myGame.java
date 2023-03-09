@@ -240,7 +240,8 @@ public class MyGame extends VariableFrameRateGame {
 
 	/**
 	 * @author Matt
-	 * @param avatar GameObject to be set as the avatar: "player"/"main character"
+	 * @param avatar GameObject to be set as the avatar:
+	 *               "player"/"main character"
 	 */
 	public void setAvatar(GameObject avatar) {
 		this.avatar = avatar;
