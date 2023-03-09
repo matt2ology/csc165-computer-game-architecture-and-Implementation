@@ -170,3 +170,27 @@ different from initial copy and that of other classmates.
 - compile.bat
 - run.bat
 - zz-ABOUT.txt
+
+## Logitech F310 Wired Gamepad (Logitech Dual Action properties)
+
+### Buttons
+
+- Button 01: X
+- Button 02: A
+- Button 03: B
+- Button 04: Y
+- Button 05: LB (left trigger front - L1)
+- Button 06: RB (right trigger front - R1)
+- Button 07: LT (left trigger back - L2)
+- Button 08: RT (right trigger back - R2)
+- Button 09: BACK (center left arrow)
+- Button 10: START (center right arrow)
+- Button 11: Left thumb stick (pressed-in)
+- Button 12: Right thumb stick (pressed-in)
+
+### Thumb Sticks
+
+- Left thumb stick: X-Axis/Y-Axis
+- Right thumb stick
+  - Right/left movement: Z-Axis
+  - Up/down movement: Z-Rotation
