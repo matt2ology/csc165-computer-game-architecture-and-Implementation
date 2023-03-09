@@ -70,7 +70,7 @@ public class MyGame extends VariableFrameRateGame {
 
 	@Override
 	public void loadShapes() {
-		float lineLength = 5.0f;
+		float lineLength = 100.0f;
 		Vector3f worldOrigin = new Vector3f(0f, 0f, 0f);
 		Vector3f lineX = new Vector3f(lineLength, 0f, 0f);
 		Vector3f lineY = new Vector3f(0f, lineLength, 0f);
