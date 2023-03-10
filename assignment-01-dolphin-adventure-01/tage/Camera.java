@@ -112,10 +112,6 @@ public class Camera
 	public void moveForward(float time, Boolean isInBounds) {
 		currentLocation = this.getLocation();
 		directionVectorN = this.getN();
-		// newLocation = new Vector3f(
-		// currentLocation.x() + directionVectorN.x() * time,
-		// currentLocation.y() + directionVectorN.y() * time,
-		// currentLocation.z() + directionVectorN.z() * time);
 		newLocation = currentLocation.add(
 				directionVectorN.x(),
 				directionVectorN.y(),
