@@ -201,7 +201,8 @@ public class MyGame extends VariableFrameRateGame {
 		(engine.getHUDmanager()).setHUD1(dispStr1, hud1Color, 15, 15);
 		(engine.getHUDmanager()).setHUD2(dispStr2, hud2Color, 500, 15);
 
-		inputManager.update((float) elapsTime); // Continuously read user's input
+		inputManager.update((float) (frameCounter/elapsTime)); // Continuously read user's input
+		frameCounter++;
 	}
 
 	@Override
