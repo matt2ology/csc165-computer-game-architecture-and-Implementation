@@ -109,7 +109,7 @@ public class Camera
 	 * @author Matt
 	 * @param time
 	 */
-	public void moveForward(float time, Boolean isInBounds) {
+	public void moveForward(float time, boolean isInBounds) {
 		currentLocation = this.getLocation();
 		directionVectorN = this.getN();
 		newLocation = currentLocation.add(
