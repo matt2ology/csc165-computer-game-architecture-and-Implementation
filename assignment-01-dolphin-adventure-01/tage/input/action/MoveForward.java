@@ -32,6 +32,8 @@ public class MoveForward extends AbstractInputAction {
     @Override
     public void performAction(float time, Event evt) {
         movement_speed = movement_scale_factor * time;
+        // the analog stick is not being used to move
+        if (evt.getValue() <= -ANALOG_STICK_DEAD_ZONE) { return; }
 
         if (game.isInFreeCamMode()) { // the camera is free to move around
             camera.moveForward(movement_speed, game.isCameraInAvatarProximity());
