@@ -10,7 +10,7 @@ import tage.GameObject;
  * 
  * @author Matt
  */
-public class MoveBackward extends AbstractInputAction {
+public class MoveBackwardAction extends AbstractInputAction {
 
     private MyGame game; // contains the avatar and camera (the world)
     private GameObject avatar; // the avatar is the "main character" in the game
@@ -22,7 +22,7 @@ public class MoveBackward extends AbstractInputAction {
     private float movement_speed,
             movement_scale_factor = -(0.05f); // negative because we are moving backward
 
-    public MoveBackward(MyGame game) {
+    public MoveBackwardAction(MyGame game) {
         this.game = game;
         this.avatar = game.getAvatar();
         this.camera = game.getCameraMain();

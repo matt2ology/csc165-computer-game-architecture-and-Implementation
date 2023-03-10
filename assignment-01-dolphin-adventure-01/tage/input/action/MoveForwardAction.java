@@ -11,7 +11,7 @@ import net.java.games.input.Event;
  * 
  * @author Matt
  */
-public class MoveForward extends AbstractInputAction {
+public class MoveForwardAction extends AbstractInputAction {
 
     private MyGame game;
     private GameObject avatar; // the avatar is the "main character" in the game
@@ -23,7 +23,7 @@ public class MoveForward extends AbstractInputAction {
     private float movement_speed,
             movement_scale_factor = 0.05f; // positive because we are moving forward
 
-    public MoveForward(MyGame game) {
+    public MoveForwardAction(MyGame game) {
         this.game = game;
         this.avatar = game.getAvatar();
         this.camera = game.getCameraMain();
