@@ -166,6 +166,9 @@ public class MyGame extends VariableFrameRateGame {
 		MoveForward moveForward = new MoveForward(this);
 		MoveBackward moveBackward = new MoveBackward(this);
 
+		// Gamepad Logitech F310
+		// TODO: Add Gamepad support
+
 		// Keyboard
 		inputManager.associateActionWithAllKeyboards(
 				net.java.games.input.Component.Identifier.Key.W,
