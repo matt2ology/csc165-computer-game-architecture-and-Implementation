@@ -29,6 +29,11 @@ public class MoveForward extends AbstractInputAction {
         this.camera = game.getCameraMain();
     }
 
+    /*
+    * scale the movement speed by the time since the last frame was 
+    * rendered (time) and the arbitrary scaling factor (movement_scale_factor)
+    * to make the avatar move at a reasonable speed (movement_speed) 
+    */
     @Override
     public void performAction(float time, Event evt) {
         movement_speed = movement_scale_factor * time;
