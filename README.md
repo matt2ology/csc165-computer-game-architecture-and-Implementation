@@ -190,7 +190,21 @@ different from initial copy and that of other classmates.
 
 ### Thumb Sticks
 
-- Left thumb stick: X-Axis/Y-Axis
-- Right thumb stick
-  - Right/left movement: Z-Axis
-  - Up/down movement: Z-Rotation
+#### Left thumb stick
+
+- X-Axis
+  - FULL TILT LEFT: 0
+  - FULL TILT RIGHT: 255
+- Y-Axis
+  - FULL TILT UP: 0
+  - FULL TILT DOWN: 255
+
+#### Right thumb stick
+
+- Z-Axis - right/left movement
+  - FULL TILT LEFT VALUE: 0
+  - FULL TILT RIGHT VALUE: 255
+ 
+- Z-Rotation - Up/down movement
+  - FULL TILT UP: 0
+  - FULL TILT DOWN: 255
