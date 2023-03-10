@@ -20,7 +20,8 @@ public class MoveForward extends AbstractInputAction {
     /**
      * Arbitrary scaling factor to make the avatar move at a reasonable speed
      */
-    private float movement_scale_factor = 0.01f;
+    private float movement_speed,
+            movement_scale_factor = 0.05f; // positive because we are moving forward
 
     public MoveForward(MyGame game) {
         this.game = game;
@@ -30,15 +31,12 @@ public class MoveForward extends AbstractInputAction {
 
     @Override
     public void performAction(float time, Event evt) {
-        // the thumbstick is not being used to move the avatar
-        if (Math.abs(evt.getValue()) < arbitraryThumbStickDeadZone) {
-            return;
-        }
+        movement_speed = movement_scale_factor * time;
 
         if (game.isInFreeCamMode()) { // the camera is free to move around
-            camera.moveForward(time * movement_scale_factor, game.isCameraInAvatarProximity());
+            camera.moveForward(movement_speed, game.isCameraInAvatarProximity());
         } else { // the camera is bound to the avatar
-            avatar.moveForward(time * movement_scale_factor);
+            avatar.moveForward(movement_speed);
             game.positionCameraBehindAvatar();
         }
     }
