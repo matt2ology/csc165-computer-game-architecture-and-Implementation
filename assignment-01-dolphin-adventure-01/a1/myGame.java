@@ -284,8 +284,8 @@ public class MyGame extends VariableFrameRateGame {
 	 * @author Matt
 	 */
 	public void positionCameraBehindAvatar() {
-		float distanceBehindTheAvatar = -1.5f;
-		float heightAboveTheAvatar = 1.5f;
+		float distanceBehindTheAvatar = -4.5f;
+		float heightAboveTheAvatar = 1.0f;
 		if (!isInFreeCamMode()) {
 			location = getAvatar().getWorldLocation();
 			forward = getAvatar().getWorldForwardVector();
