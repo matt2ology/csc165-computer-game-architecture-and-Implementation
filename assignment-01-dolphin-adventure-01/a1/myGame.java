@@ -2,6 +2,7 @@ package a1;
 
 import tage.*;
 import tage.input.InputManager; // tage.input is needed for input management (keyboard, mouse, gamepad, etc.)
+import tage.input.action.MoveForward;
 import tage.shapes.*;
 
 import java.lang.Math; // java.lang.Math is always needed for Math functions like sin, cos, etc.)
@@ -9,18 +10,36 @@ import java.awt.*; // java.awt is almost always needed for graphics and GUI elem
 import java.awt.event.*; // java.awt.event is almost always needed for keyboard and mouse events and listeners
 import java.io.*; // java.io is almost always needed for file input and output
 import javax.swing.*; // javax.swing is almost always needed for GUI elements
+import java.util.logging.Logger;
+
 import org.joml.*; // org.joml is almost always needed for 3D math and transformations
 
 public class MyGame extends VariableFrameRateGame {
+	public static Logger logging = Logger.getLogger(MyGame.class.getName());
+
+	/**
+	 * 1000 milliseconds in one second. Used for converting between time units.
+	 */
+	private static final double ONE_SECOND = 1000.0;
+	/**
+	 * The maximum distance the camera can be from the avatar.
+	 */
+	private static final int CAMERA_TETHER_DISTANCE = 5;
+
 	private static Engine engine;
 
 	private InputManager inputManager;
+	private Vector3d cameraDistanceFromAvatar = new Vector3d(0, 0, 0);
+	private Vector3f location, // object location in world coordinates
+			forward, // object forward vector in world coordinates (n-vector/z-axis)
+			up, // object up vector in world coordinates (v-vector/y-axis)
+			right; // object right vector in world coordinates (u-vector/x-axis)
 
 	/**
-	 * photomode and/or freecam/flycam mode
+	 * Photomode and/or freecam/flycam mode
 	 * - if true, the camera is not attached to the avatar
 	 */
-	private boolean freeCam = false;
+	private boolean freeCamMode = false;
 	private boolean paused = false;
 	private int counter = 0;
 	private double lastFrameTime, currFrameTime, elapsTime;
@@ -39,7 +58,7 @@ public class MyGame extends VariableFrameRateGame {
 			worldAxisLineShapeX,
 			worldAxisLineShapeY,
 			worldAxisLineShapeZ;
-	private TextureImage doltx;
+	private TextureImage dolTX;
 	private Light light1;
 
 	public MyGame() {
@@ -58,7 +77,7 @@ public class MyGame extends VariableFrameRateGame {
 		System.out.println("press DOWN or Right Joystick to pitch down");
 		System.out.println("press SPACE or Button 2 (A) to hop on a nearby dolphin");
 		System.out.println("--------------------------------------------------");
-		System.err.println("FreeCam mode is " + (isFreeCam() ? "ON" : "OFF"));
+		System.err.println("FreeCam mode is " + (isInFreeCamMode() ? "ON" : "OFF"));
 	}
 
 	public static void main(String[] args) {
@@ -85,26 +104,32 @@ public class MyGame extends VariableFrameRateGame {
 
 	@Override
 	public void loadTextures() {
-		doltx = new TextureImage("Dolphin_HighPolyUV.png");
+		dolTX = new TextureImage("Dolphin_HighPolyUV.png");
 	}
 
 	@Override
 	public void buildObjects() {
-		Matrix4f initialTranslation, initialScale;
+		float dolInitialAngDeg = 0.0f;
+		Matrix4f dolInitialTranslation, dolInitialScale, dolInitialRotation;
+
+		dolInitialTranslation = (new Matrix4f())
+				.translation(0.0f, 0.0f, 0.0f);
+		dolInitialScale = (new Matrix4f()).scaling(3.0f);
+		dolInitialRotation = (new Matrix4f()).rotationY(
+				(float) Math.toRadians(dolInitialAngDeg));
 
 		// build dolphin in the center of the window
-		dol = new GameObject(GameObject.root(), dolS, doltx);
-		initialTranslation = (new Matrix4f()).translation(0, 0, 0);
-		initialScale = (new Matrix4f()).scaling(3.0f);
-		dol.setLocalTranslation(initialTranslation);
-		dol.setLocalScale(initialScale);
+		dol = new GameObject(GameObject.root(), dolS, dolTX);
+		dol.setLocalTranslation(dolInitialTranslation);
+		dol.setLocalScale(dolInitialScale);
+		dol.setLocalRotation(dolInitialRotation);
 
-		// Build World Axis
+		// Build World Axis Lines (X, Y, Z) in the center of the window
 		worldAxisX = new GameObject(GameObject.root(), worldAxisLineShapeX);
 		worldAxisY = new GameObject(GameObject.root(), worldAxisLineShapeY);
 		worldAxisZ = new GameObject(GameObject.root(), worldAxisLineShapeZ);
 
-		// Set world axis colors
+		// Set world axis colors (red, green, blue) - X, Y, Z respectively
 		worldAxisX.getRenderStates().setColor(new Vector3f(1f, 0, 0));
 		worldAxisY.getRenderStates().setColor(new Vector3f(0, 1f, 0));
 		worldAxisZ.getRenderStates().setColor(new Vector3f(0, 0, 1f));
@@ -133,35 +158,33 @@ public class MyGame extends VariableFrameRateGame {
 
 		// ------------- positioning the camera -------------
 		getCameraMain().setLocation(new Vector3f(0, 0, 5));
+		positionCameraBehindAvatar();
+		unboundCameraFromAvatar();
 
 		// ------------- Control Inputs -------------
 		inputManager = engine.getInputManager();
-		MoveActionForward moveForward = new MoveActionForward(this);
-		MoveActionBackward moveBackward = new MoveActionBackward(this);
-		InteractAvatar interactAvatar = new InteractAvatar(this);
+		MoveForward moveForward = new MoveForward(this);
+
+		// Keyboard
 		inputManager.associateActionWithAllKeyboards(
 				net.java.games.input.Component.Identifier.Key.W,
 				moveForward,
 				InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
 
-		inputManager.associateActionWithAllKeyboards(
-				net.java.games.input.Component.Identifier.Key.S,
-				moveBackward,
+		// Gamepad Logitech F310
+		inputManager.associateActionWithAllGamepads(
+				net.java.games.input.Component.Identifier.Button.Axis.Y,
+				moveForward,
 				InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
 
-		inputManager.associateActionWithAllKeyboards(
-				net.java.games.input.Component.Identifier.Key.SPACE,
-				interactAvatar,
-				InputManager.INPUT_ACTION_TYPE.ON_PRESS_ONLY);
 	}
 
 	@Override
-	public void update() { // rotate dolphin if not paused
+	public void update() { // called every frame. Each loop is one frame.
 		lastFrameTime = currFrameTime;
 		currFrameTime = System.currentTimeMillis();
 		if (!paused) {
-			// 1000.0 is needed to convert from milliseconds to seconds
-			elapsTime += (currFrameTime - lastFrameTime) / 1000.0;
+			elapsTime += (currFrameTime - lastFrameTime) / ONE_SECOND;
 		}
 
 		// build and set HUD
@@ -217,17 +240,21 @@ public class MyGame extends VariableFrameRateGame {
 	 * @author Matt
 	 * @return the freeCam boolean value (true or false)
 	 */
-	public boolean isFreeCam() {
-		return freeCam;
+	public boolean isInFreeCamMode() {
+		return freeCamMode;
 	}
 
 	/**
+	 * Toggles the freeCam boolean value to true or false
+	 * 
 	 * @author Matt
-	 *         Toggles the freeCam boolean value to true or false
 	 */
 	public void toggleFreeCam() {
-		this.freeCam = !freeCam;
-		System.err.println("freeCam = " + freeCam);
+		logging.info("freeCamMode : " + freeCamMode);
+		this.freeCamMode = !freeCamMode;
+		logging.info("toggled freeCamMode : " + freeCamMode);
+		positionCameraBehindAvatar();
+		unboundCameraFromAvatar();
 	}
 
 	/**
@@ -245,5 +272,68 @@ public class MyGame extends VariableFrameRateGame {
 	 */
 	public void setAvatar(GameObject avatar) {
 		this.avatar = avatar;
+	}
+
+	/**
+	 * Position the camera behind the avatar (the "player"/"main character")
+	 * Based on freeCam boolean value (true or false)
+	 * 
+	 * @author Matt
+	 */
+	public void positionCameraBehindAvatar() {
+		float distanceBehindTheAvatar = -1.5f;
+		float heightAboveTheAvatar = 1.5f;
+		if (!isInFreeCamMode()) {
+			location = getAvatar().getWorldLocation();
+			forward = getAvatar().getWorldForwardVector();
+			up = getAvatar().getWorldUpVector();
+			right = getAvatar().getWorldRightVector();
+			getCameraMain().setU(right);
+			getCameraMain().setV(up);
+			getCameraMain().setN(forward);
+			getCameraMain().setLocation(location
+					.add(up.mul(heightAboveTheAvatar))
+					.add(forward.mul(distanceBehindTheAvatar)));
+		}
+	}
+
+	/**
+	 * Unbind/dismount the camera from the avatar (the "player"/"main character")
+	 * Based on freeCam boolean value (true or false)
+	 * 
+	 * @author Matt
+	 */
+	public void unboundCameraFromAvatar() {
+		float dismountDistanceOff = -5f;
+		float dismountOffFromGround = 0.5f;
+		if (isInFreeCamMode()) {
+			location = getAvatar().getWorldLocation();
+			forward = getAvatar().getWorldForwardVector();
+			up = getAvatar().getWorldUpVector();
+			right = getAvatar().getWorldRightVector();
+			getCameraMain().setU(right);
+			getCameraMain().setV(up);
+			getCameraMain().setN(forward);
+			getCameraMain().setLocation(location
+					.add(up.mul(dismountOffFromGround))
+					.add(forward.mul(dismountDistanceOff)));
+		}
+	}
+
+	/**
+	 * @author Matt
+	 * @return true if the camera is within the tether distance of the avatar
+	 * @see cameraDistanceFromAvatar
+	 */
+	public boolean isCameraInAvatarProximity() {
+		cameraDistanceFromAvatar.x = (Math.abs(
+				getAvatar().getWorldLocation().x() - getCameraMain().getLocation().x()));
+		cameraDistanceFromAvatar.y = (Math.abs(
+				getAvatar().getWorldLocation().y() - getCameraMain().getLocation().y()));
+		cameraDistanceFromAvatar.z = (Math.abs(
+				getAvatar().getWorldLocation().z() - getCameraMain().getLocation().z()));
+		return (cameraDistanceFromAvatar.length() < CAMERA_TETHER_DISTANCE)
+				? true
+				: false;
 	}
 }

@@ -86,7 +86,17 @@ public class GameObject
 	private PhysicsObject physicsObject;
 	private boolean isTerrain = false;
 
-	//------------------ CONSTRUCTORS -----------------
+	// used for moveForward() and moveBackward() functions
+	private Vector3f currentLocation, newLocation;
+	/**
+	 * Forward direction vector in local space (0, 0, 1)
+	 * in normalized device coordinates (NDC) space (0, 0, 1, 1)
+	 * in world space (x, y, z, 1) in world space (x, y, z)
+	 * 
+	 * 1 for w component is important because we are using
+	 * a 4D vector for a 3D vector (homogeneous coordinates)
+	 */
+	private Vector4f forwardDirectionVectorN;
 
 	// only applicable for creating the root node
 	protected GameObject()
@@ -446,4 +456,21 @@ public class GameObject
 		return new Vector3f(worldTranslation.getTranslation(v));
     }
 
+	/**
+	 * Moves the object forward in the direction it is facing by the specified time
+	 * 
+	 * @author: Matt
+	 * @param time
+	 */
+	public void moveForward(float time) {
+		currentLocation = this.getWorldLocation();
+		forwardDirectionVectorN = new Vector4f(0f, 0f, 1f, 1f);
+		forwardDirectionVectorN.mul(this.getWorldRotation());
+		forwardDirectionVectorN.mul(time);
+		newLocation = currentLocation.add(
+				forwardDirectionVectorN.x(),
+				forwardDirectionVectorN.y(),
+				forwardDirectionVectorN.z());
+		this.setLocalLocation(newLocation);
+	}
 }

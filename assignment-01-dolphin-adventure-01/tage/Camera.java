@@ -21,7 +21,13 @@ public class Camera
 	private Vector3f location, defaultLocation;
 	private Matrix4f view, viewR, viewT;
 
-	/** instantiates a Camera object at location (0,0,1) and facing down the -Z axis towards the origin */
+	// used for moveForward() and moveBackward() functions
+	private Vector3f directionVectorN, currentLocation, newLocation;
+
+	/**
+	 * instantiates a Camera object at location (0,0,1) and facing down the -Z axis
+	 * towards the origin
+	 */
 	public Camera()
 	{	defaultLocation = new Vector3f(0.0f, 0.0f, 1.0f);
 		defaultU = new Vector3f(1.0f, 0.0f, 0.0f);
@@ -94,6 +100,28 @@ public class Camera
 		view.mul(viewR);
 		view.mul(viewT);
 
-		return(view);
+		return (view);
+	}
+
+	/**
+	 * Moves the camera forward in the direction it is facing.
+	 * 
+	 * @author Matt
+	 * @param time
+	 */
+	public void moveForward(float time, Boolean isInBounds) {
+		currentLocation = this.getLocation();
+		directionVectorN = this.getN();
+		// newLocation = new Vector3f(
+		// currentLocation.x() + directionVectorN.x() * time,
+		// currentLocation.y() + directionVectorN.y() * time,
+		// currentLocation.z() + directionVectorN.z() * time);
+		newLocation = currentLocation.add(
+				directionVectorN.x(),
+				directionVectorN.y(),
+				directionVectorN.z());
+		if (isInBounds) {
+			this.setLocation(newLocation);
+		}
 	}
 }
