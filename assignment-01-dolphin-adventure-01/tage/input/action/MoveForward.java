@@ -7,7 +7,7 @@ import tage.GameObject;
 import net.java.games.input.Event;
 
 /**
- * MoveForward is an input action that moves the avatar forward.
+ * MoveForward is an input action that moves the avatar or camera forward.
  * 
  * @author Matt
  */
