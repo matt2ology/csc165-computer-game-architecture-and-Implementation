@@ -474,7 +474,7 @@ public class GameObject
 		this.setLocalLocation(newLocation);
 	}
 
-    public void moveBackward(float movementSpeed) {
+	public void moveBackward(float movementSpeed) {
 		currentLocation = this.getWorldLocation();
 		forwardDirectionVectorN = new Vector4f(0f, 0f, 1f, 1f);
 		forwardDirectionVectorN.mul(this.getWorldRotation());
@@ -484,5 +484,5 @@ public class GameObject
 				forwardDirectionVectorN.y(),
 				forwardDirectionVectorN.z());
 		this.setLocalLocation(newLocation);
-    }
+	}
 }
