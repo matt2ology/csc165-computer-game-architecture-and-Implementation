@@ -196,8 +196,8 @@ different from initial copy and that of other classmates.
   - FULL TILT LEFT: 0
   - FULL TILT RIGHT: 255
 - Y-Axis
-  - FULL TILT UP: 0
-  - FULL TILT DOWN: 255
+  - FULL TILT UP: 0 -> evt.value() = -1.0
+  - FULL TILT DOWN: 255 -> evt.value() = 1.0
 
 #### Right thumb stick
 
