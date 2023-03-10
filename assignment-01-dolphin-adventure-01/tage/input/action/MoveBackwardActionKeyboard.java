@@ -10,7 +10,7 @@ import tage.GameObject;
  * 
  * @author Matt
  */
-public class MoveBackwardAction extends AbstractInputAction {
+public class MoveBackwardActionKeyboard extends AbstractInputAction {
 
     private MyGame game; // contains the avatar and camera (the world)
     private GameObject avatar; // the avatar is the "main character" in the game
@@ -20,9 +20,9 @@ public class MoveBackwardAction extends AbstractInputAction {
      * Arbitrary scaling factor to make the movement at a reasonable speed
      */
     private float movement_speed,
-            movement_scale_factor = -(0.05f); // negative because we are moving backward
+            movement_scale_factor = -(0.005f); // negative because we are moving backward
 
-    public MoveBackwardAction(MyGame game) {
+    public MoveBackwardActionKeyboard(MyGame game) {
         this.game = game;
         this.avatar = game.getAvatar();
         this.camera = game.getCameraMain();
@@ -30,15 +30,14 @@ public class MoveBackwardAction extends AbstractInputAction {
 
     @Override
     public void performAction(float time, Event evt) {
-        movement_speed = movement_scale_factor * time;
+        movement_speed = (movement_scale_factor * time);
         /*
          * the analog stick is not being used to move
          * ANALOG_STICK_DEAD_ZONE is negative because we are moving backward
          */
-        if (evt.getValue() >= ANALOG_STICK_DEAD_ZONE) {
+        if (evt.getValue() >= -ANALOG_STICK_DEAD_ZONE && evt.getValue() <= ANALOG_STICK_DEAD_ZONE) {
             return;
         }
-        System.err.println("MoveBackward.performAction(): evt.getValue() = " + evt.getValue());
 
         if (game.isInFreeCamMode()) { // the camera is free to move around
             camera.moveBackward(movement_speed, game.isCameraInAvatarProximity());

@@ -18,7 +18,7 @@ import tage.input.InputManager;
  */
 public abstract class AbstractInputAction implements IAction {
 	/** To avoid jitter when the stick is not perfectly centered */
-	static final float ANALOG_STICK_DEAD_ZONE = 0.02f;
+	protected float ANALOG_STICK_DEAD_ZONE = 0.02f;
 
 	// speed at which the action can occur
 	private float speed = 1;

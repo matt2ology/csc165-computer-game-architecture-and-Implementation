@@ -2,8 +2,9 @@ package a1;
 
 import tage.*;
 import tage.input.InputManager; // tage.input is needed for input management (keyboard, mouse, gamepad, etc.)
-import tage.input.action.MoveBackward;
-import tage.input.action.MoveForward;
+import tage.input.action.MoveBackwardActionKeyboard;
+import tage.input.action.MoveForwardActionKeyboard;
+import tage.input.action.MoveYawActionKeyboard;
 import tage.shapes.*;
 
 import java.lang.Math; // java.lang.Math is always needed for Math functions like sin, cos, etc.)
@@ -11,9 +12,13 @@ import java.awt.*; // java.awt is almost always needed for graphics and GUI elem
 import java.awt.event.*; // java.awt.event is almost always needed for keyboard and mouse events and listeners
 import java.io.*; // java.io is almost always needed for file input and output
 import javax.swing.*; // javax.swing is almost always needed for GUI elements
+
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.joml.*; // org.joml is almost always needed for 3D math and transformations
+
+import net.java.games.input.Controller;
 
 public class MyGame extends VariableFrameRateGame {
 	public static Logger logging = Logger.getLogger(MyGame.class.getName());
@@ -42,8 +47,43 @@ public class MyGame extends VariableFrameRateGame {
 	 */
 	private boolean freeCamMode = false;
 	private boolean paused = false;
-	private int counter = 0;
-	private double lastFrameTime, currFrameTime, elapsTime;
+	private int counter = 0, frameCounter = 0;
+	private double lastFrameTime,
+			currFrameTime,
+			elapsTime,
+			framePerSecond = 0,
+			fpsSum = 0, // fpsSum is the sum of the last 100 frames
+			fpsAvg = 0;
+
+	/**
+	 * @return the average fps over the last 100 frames
+	 * @author Matt
+	 */
+	public double getFpsAvg() {
+		return fpsAvg;
+	}
+
+	/**
+	 * calculate the average fps over the last 100 frames
+	 * (or less if there are less than 100 frames)
+	 * 
+	 * @param fpsAvg
+	 * @author Matt
+	 */
+	public void calculateAverageFPS() {
+		if (frameCounter < 100) {
+			// add the newest frame to the sum
+			fpsSum += framePerSecond;
+			fpsAvg = fpsSum / frameCounter;
+		} else {
+			// remove the oldest frame from the sum
+			fpsSum -= fpsAvg;
+			// add the newest frame to the sum
+			fpsSum += framePerSecond;
+			// calculate the average fps over the last 100 frames
+			fpsAvg = fpsSum / 100;
+		}
+	}
 
 	/**
 	 * The camera is the "eye" of the player.
@@ -163,22 +203,67 @@ public class MyGame extends VariableFrameRateGame {
 
 		// ------------- Control Inputs -------------
 		inputManager = engine.getInputManager();
-		MoveForward moveForward = new MoveForward(this);
-		MoveBackward moveBackward = new MoveBackward(this);
+		MoveForwardActionKeyboard moveForward = new MoveForwardActionKeyboard(this);
+		MoveBackwardActionKeyboard moveBackward = new MoveBackwardActionKeyboard(this);
+		MoveYawActionKeyboard yawLeft = new MoveYawActionKeyboard(this, 0);
+		MoveYawActionKeyboard yawRight = new MoveYawActionKeyboard(this, 1);
+		ArrayList<Controller> controllers = inputManager.getControllers(); // get all our controllers
 
-		// Gamepad Logitech F310
-		// TODO: Add Gamepad support
+		/*
+		 * Gamepad Logitech F310 - Controller: Logitech Dual Action - Type: Stick
+		 */
+		for (Controller controller : controllers) {
+			System.err.println("Controller: " + controller.getName());
+			System.err.println("Type: " + controller.getType());
+			if (controller.getType() == Controller.Type.STICK) {
+				inputManager.associateAction(
+						controller,
+						net.java.games.input.Component.Identifier.Axis.Y,
+						moveForward,
+						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
 
-		// Keyboard
-		inputManager.associateActionWithAllKeyboards(
-				net.java.games.input.Component.Identifier.Key.W,
-				moveForward,
-				InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
+				inputManager.associateAction(
+						controller,
+						net.java.games.input.Component.Identifier.Axis.X,
+						yawLeft,
+						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
 
-		inputManager.associateActionWithAllKeyboards(
-				net.java.games.input.Component.Identifier.Key.S,
-				moveBackward,
-				InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
+				inputManager.associateAction(
+						controller,
+						net.java.games.input.Component.Identifier.Axis.RY,
+						moveBackward,
+						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
+
+				inputManager.associateAction(
+						controller,
+						net.java.games.input.Component.Identifier.Axis.RX,
+						yawRight,
+						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
+
+			} else if (controller.getType() == Controller.Type.KEYBOARD) {
+				inputManager.associateActionWithAllKeyboards(
+						net.java.games.input.Component.Identifier.Key.W,
+						moveForward,
+						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
+
+				inputManager.associateActionWithAllKeyboards(
+						net.java.games.input.Component.Identifier.Key.A,
+						yawLeft,
+						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
+
+				inputManager.associateActionWithAllKeyboards(
+						net.java.games.input.Component.Identifier.Key.S,
+						moveBackward,
+						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
+
+				inputManager.associateActionWithAllKeyboards(
+						net.java.games.input.Component.Identifier.Key.D,
+						yawRight,
+						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
+			}
+		}
+
+		// Keyboard Controls (WASD) and (QE) for movement and rotation respectively
 
 	}
 
@@ -201,7 +286,7 @@ public class MyGame extends VariableFrameRateGame {
 		(engine.getHUDmanager()).setHUD1(dispStr1, hud1Color, 15, 15);
 		(engine.getHUDmanager()).setHUD2(dispStr2, hud2Color, 500, 15);
 
-		inputManager.update((float) (frameCounter/elapsTime)); // Continuously read user's input
+		inputManager.update((float) (frameCounter / elapsTime)); // Continuously read user's input
 		frameCounter++;
 	}
 
