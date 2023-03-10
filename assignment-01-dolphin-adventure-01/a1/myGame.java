@@ -2,6 +2,7 @@ package a1;
 
 import tage.*;
 import tage.input.InputManager; // tage.input is needed for input management (keyboard, mouse, gamepad, etc.)
+import tage.input.action.MoveBackward;
 import tage.input.action.MoveForward;
 import tage.shapes.*;
 
@@ -157,13 +158,13 @@ public class MyGame extends VariableFrameRateGame {
 		setAvatar(dol); // The avatar is the object that the camera follows
 
 		// ------------- positioning the camera -------------
-		getCameraMain().setLocation(new Vector3f(0, 0, 5));
 		positionCameraBehindAvatar();
 		unboundCameraFromAvatar();
 
 		// ------------- Control Inputs -------------
 		inputManager = engine.getInputManager();
 		MoveForward moveForward = new MoveForward(this);
+		MoveBackward moveBackward = new MoveBackward(this);
 
 		// Keyboard
 		inputManager.associateActionWithAllKeyboards(
@@ -171,10 +172,9 @@ public class MyGame extends VariableFrameRateGame {
 				moveForward,
 				InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
 
-		// Gamepad Logitech F310
-		inputManager.associateActionWithAllGamepads(
-				net.java.games.input.Component.Identifier.Button.Axis.Y,
-				moveForward,
+		inputManager.associateActionWithAllKeyboards(
+				net.java.games.input.Component.Identifier.Key.S,
+				moveBackward,
 				InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
 
 	}

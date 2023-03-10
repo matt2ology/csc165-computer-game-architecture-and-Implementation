@@ -466,11 +466,16 @@ public class GameObject
 		currentLocation = this.getWorldLocation();
 		forwardDirectionVectorN = new Vector4f(0f, 0f, 1f, 1f);
 		forwardDirectionVectorN.mul(this.getWorldRotation());
-		forwardDirectionVectorN.mul(time);
+
+    public void moveBackward(float movementSpeed) {
+		currentLocation = this.getWorldLocation();
+		forwardDirectionVectorN = new Vector4f(0f, 0f, 1f, 1f);
+		forwardDirectionVectorN.mul(this.getWorldRotation());
+		forwardDirectionVectorN.mul(movementSpeed);
 		newLocation = currentLocation.add(
 				forwardDirectionVectorN.x(),
 				forwardDirectionVectorN.y(),
 				forwardDirectionVectorN.z());
 		this.setLocalLocation(newLocation);
-	}
+    }
 }

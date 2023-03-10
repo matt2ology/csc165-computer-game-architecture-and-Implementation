@@ -109,14 +109,15 @@ public class Camera
 	 * @author Matt
 	 * @param time
 	 */
-	public void moveForward(float time, boolean isInBounds) {
+
+	public void moveBackward(float time, boolean isCameraInAvatarProximity) {
 		currentLocation = this.getLocation();
 		directionVectorN = this.getN();
 		newLocation = currentLocation.add(
 				directionVectorN.x(),
 				directionVectorN.y(),
 				directionVectorN.z());
-		if (isInBounds) {
+		if (isCameraInAvatarProximity) {
 			this.setLocation(newLocation);
 		}
 	}
