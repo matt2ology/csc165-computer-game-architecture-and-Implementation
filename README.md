@@ -101,13 +101,17 @@ If `CLASSPATH` System variable does not exist do the following:
 C:\javagaming\jogl\jogl-all.jar
 C:\javagaming\jogl\gluegen-rt.jar
 C:\javagaming\jogl\joal.jar
-C:\javagaming\joml\joml-1.9.25.jar
+C:\javagaming\joml\joml-1.10.0.jar
 C:\javagaming\jinput\jinput.jar
 C:\javagaming\jbullet\jbullet.jar
 C:\javagaming\vecmath\vecmath.jar
 ```
 
 ![CLASSPATH ENVIRONMENT VARIABLES](_course_readme_assets/classpath_environment_variables.png)
+
+##### VS Code Reference Libraries setup paths
+
+> "C:\javagaming\jogl\jogl-all.jar" "C:\javagaming\jogl\gluegen-rt.jar" "C:\javagaming\jogl\joal.jar" "C:\javagaming\joml\joml-1.10.0.jar" "C:\javagaming\jinput\jinput.jar" "C:\javagaming\jbullet\jbullet.jar" "C:\javagaming\vecmath\vecmath.jar"
 
 ##### `PATH` Environment Variable Set-up
 
