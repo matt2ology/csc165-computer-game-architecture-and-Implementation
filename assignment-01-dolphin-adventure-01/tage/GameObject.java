@@ -163,7 +163,7 @@ public class GameObject
 	 * amount.
 	 * 
 	 * @param pitchSpeed the amount to pitch by
-	 * @author Matt
+	 * @author Matthew M.
 	 */
 	public void pitch(float pitchSpeed) {
 		Matrix4f previousRotation = new Matrix4f(getWorldRotation());

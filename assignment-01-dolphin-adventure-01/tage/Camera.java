@@ -106,7 +106,7 @@ public class Camera
 	/**
 	 * Moves the camera forward in the direction it is facing.
 	 * 
-	 * @author Matt
+	 * @author Matthew M.
 	 * @param time
 	 */
 	public void moveForward(float time, boolean isCameraInAvatarProximity) {

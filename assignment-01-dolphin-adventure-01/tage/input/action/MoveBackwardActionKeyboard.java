@@ -8,7 +8,7 @@ import tage.GameObject;
 /**
  * MoveBackward is an input action that moves the avatar or camera backward.
  * 
- * @author Matt
+ * @author Matthew M.
  */
 public class MoveBackwardActionKeyboard extends AbstractInputAction {
 

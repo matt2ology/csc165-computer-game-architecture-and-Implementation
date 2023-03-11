@@ -8,7 +8,7 @@ import tage.GameObject;
 /**
  * YawAction is an input action that rotates around the y-axis.
  * Uses analog left stick input for yaw rotation movement.
- * @author Matt
+ * @author Matthew M.
  */
 public class MoveYawActionStick extends AbstractInputAction {
 

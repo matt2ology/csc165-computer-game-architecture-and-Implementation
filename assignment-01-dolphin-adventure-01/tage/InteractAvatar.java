@@ -11,7 +11,7 @@ import a1.MyGame;
 /**
  * This class is used to interact with the avatar.
  * 
- * @author Matt
+ * @author Matthew M.
  */
 public class InteractAvatar extends AbstractInputAction {
     private MyGame game;
@@ -64,7 +64,7 @@ public class InteractAvatar extends AbstractInputAction {
      * @param cameraDistance - the current value of the camera (the camera)
      * @param targetDistance - the target value of the camera (the character)
      * @return true if the camera is in bounds, false if it is not
-     * @author Matt
+     * @author Matthew M.
      */
     private boolean isCameraInBounds(Vector3f cameraDistance, Vector3f targetDistance) {
         Vector3f boundingSphere = new Vector3f(1.5f, 1.5f, 1.5f);

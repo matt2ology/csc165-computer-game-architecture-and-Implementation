@@ -9,7 +9,7 @@ import net.java.games.input.Event;
 /**
  * MoveForward is an input action that moves the avatar or camera forward.
  * 
- * @author Matt
+ * @author Matthew M.
  */
 public class MoveForwardActionKeyboard extends AbstractInputAction {
 
