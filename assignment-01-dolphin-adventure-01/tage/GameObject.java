@@ -55,20 +55,24 @@ import tage.physics.PhysicsObject;
 * @author Scott Gordon
 */
 
-public class GameObject
-{
-	//------------------ STATIC AREA -----------------------
+public class GameObject {
+	// ------------------ STATIC AREA -----------------------
 	private static GameObject root;
 
 	// createRoot() is called automatically by the
 	// engine and should not be called by the game application.
 	// All other GameObjects have the root as an ancestor.
 
-	protected static GameObject createRoot() { root = new GameObject(); return root; }
+	protected static GameObject createRoot() {
+		root = new GameObject();
+		return root;
+	}
 
 	/** returns a reference to the scenegraph root node */
-	public static GameObject root() { return root; }
-	//------------------------------------------------------
+	public static GameObject root() {
+		return root;
+	}
+	// ------------------------------------------------------
 
 	private ObjShape shape;
 	private TextureImage texture;
@@ -76,7 +80,7 @@ public class GameObject
 	private RenderStates renderStates = new RenderStates();
 	private GameObject parent;
 	private HashSet<GameObject> children = new HashSet<GameObject>();
-	
+
 	private Matrix4f localTranslation, localRotation, localScale;
 	private Matrix4f worldTranslation, worldRotation, worldScale;
 	private boolean propagateTranslation, propagateRotation, propagateScale;
@@ -88,6 +92,7 @@ public class GameObject
 
 	// used for moveForward() and moveBackward() functions
 	private Vector3f currentLocation, newLocation;
+	private Vector4f forwardDirectionVectorN;
 	/**
 	 * Forward direction vector in local space (0, 0, 1)
 	 * in normalized device coordinates (NDC) space (0, 0, 1, 1)
@@ -96,8 +101,8 @@ public class GameObject
 	 * 1 for w component is important because we are using
 	 * a 4D vector for a 3D vector (homogeneous coordinates)
 	 */
-	
-	/**Pitch variables*/
+
+	/** Pitch variables */
 	private Matrix4f currentPitch, // current pitch in radians (x, y, z, 1)
 			newPitch, // new pitch in radians (x, y, z, 1)
 			pitchPositionAngle; // pitch vector in radians (x, y, z, 1)
@@ -456,5 +461,28 @@ public class GameObject
 		newPitch = currentPitch;
 		newPitch.mul(pitchPositionAngle);
 		this.setLocalRotation(newPitch);
+	}
+	/**
+	 * Yaw the object around the up vector of the object
+	 * (not the world up vector) by the specified amount.
+	 * 
+	 * @param rotationSpeed the amount to rotate by
+	 * @author Matthew M.
+	 */
+	public void yaw(float rotationSpeed) {
+		Matrix4f previousRotation = new Matrix4f(getWorldRotation());
+		Vector4f previousUpAngle = new Vector4f(0f, 1f, 0f, 1f)
+				.mul(previousRotation);
+
+		Matrix4f rotationAroundGameObjUpAngle;
+		rotationAroundGameObjUpAngle = new Matrix4f().rotation(
+				rotationSpeed, new Vector3f(
+						previousUpAngle.x(),
+						previousUpAngle.y(),
+						previousUpAngle.z()));
+
+		Matrix4f newRotation = previousRotation;
+		rotationAroundGameObjUpAngle.mul(newRotation);
+		setLocalRotation(rotationAroundGameObjUpAngle);
 	}
 }

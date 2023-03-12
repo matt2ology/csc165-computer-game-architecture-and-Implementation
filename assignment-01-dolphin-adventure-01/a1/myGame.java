@@ -201,8 +201,8 @@ public class MyGame extends VariableFrameRateGame {
 		ArrayList<Controller> controllers = inputManager.getControllers(); // get all our controllers
 		MoveForwardActionKeyboard moveForward = new MoveForwardActionKeyboard(this);
 		MoveBackwardActionKeyboard moveBackward = new MoveBackwardActionKeyboard(this);
-		MoveYawActionKeyboard yawLeft = new MoveYawActionKeyboard(this, 0);
-		MoveYawActionKeyboard yawRight = new MoveYawActionKeyboard(this, 1);
+		MoveYawActionKeyboard yawLeft = new MoveYawActionKeyboard(this, 1);
+		MoveYawActionKeyboard yawRight = new MoveYawActionKeyboard(this, -1);
 		MovePitchUpActionKeyboard pitchUp = new MovePitchUpActionKeyboard(this);
 		MovePitchDownActionKeyboard pitchDown = new MovePitchDownActionKeyboard(this);
 

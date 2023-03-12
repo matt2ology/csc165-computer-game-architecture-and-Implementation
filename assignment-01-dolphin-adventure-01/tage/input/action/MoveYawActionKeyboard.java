@@ -7,9 +7,10 @@ import tage.GameObject;
 
 /**
  * YawAction is an input action that rotates around the y-axis.
+ * 
  * @author Matthew M.
  */
-public class MoveYawActionKeyboard extends AbstractInputAction{
+public class MoveYawActionKeyboard extends AbstractInputAction {
 
     private MyGame game;
     private GameObject avatar; // the avatar is the "main character" in the game
@@ -24,31 +25,30 @@ public class MoveYawActionKeyboard extends AbstractInputAction{
     /**
      * Arbitrary value denoting that the analog stick is being used to rotate
      * <ul>
-     * <li> <code>0</code> rotate left with keyboard </li>
-     * <li> <code>-1</code> is for analog joystick </li>
-     * <li> <code>1</code> rotate right with keyboard </li>
+     * <li><code>1</code> rotate left with keyboard</li>
+     * <li><code>-1</code> rotate right with keyboard</li>
      * </ul>
      */
     private int inputConfiguration;
 
     /**
      * Constructor for analog stick input.
+     * 
      * @param game
      */
     public MoveYawActionKeyboard(MyGame game) {
         this.game = game;
         this.avatar = game.getAvatar();
         this.camera = game.getCameraMain();
-        this.inputConfiguration = -1;
     }
 
     /**
      * Constructor for keyboard input.
      * When the analog stick is not used as input,
-     * the direction is either -1 (left) or 1 (right).
+     * the direction is either 1 (left) or -1 (right).
      * 
      * @param game
-     * @param direction -1 for left, 1 for right:
+     * @param direction 1 for left, -1 for right:
      *                  the analog stick is not used as input
      */
     public MoveYawActionKeyboard(MyGame game, int direction) {
@@ -60,13 +60,12 @@ public class MoveYawActionKeyboard extends AbstractInputAction{
 
     @Override
     public void performAction(float time, Event evt) {
-        movement_speed = movement_scale_factor * time;
+        movement_speed = movement_scale_factor * time * inputConfiguration;
 
-        System.err.println("evt.getValue() = " + evt.getValue());
         if (game.isInFreeCamMode()) { // the camera is free to move around
-            //camera.yaw(inputConfiguration, evt.getValue(), movement_speed);
+            camera.yaw(movement_speed);
         } else { // the camera is bound to the avatar
-            avatar.yaw(inputConfiguration, evt.getValue(), movement_speed);
+            avatar.yaw(movement_speed);
             game.positionCameraBehindAvatar();
         }
     }
