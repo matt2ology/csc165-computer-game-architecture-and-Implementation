@@ -20,7 +20,7 @@ public class MoveBackwardActionKeyboard extends AbstractInputAction {
      * Arbitrary scaling factor to make the movement at a reasonable speed
      */
     private float movement_speed,
-            movement_scale_factor = -(0.005f); // negative because we are moving backward
+            movement_scale_factor = -(0.003f); // negative because we are moving backward
 
     public MoveBackwardActionKeyboard(MyGame game) {
         this.game = game;

@@ -21,7 +21,7 @@ public class MoveForwardActionKeyboard extends AbstractInputAction {
      * Arbitrary scaling factor to make the avatar move at a reasonable speed
      */
     private float movement_speed,
-            movement_scale_factor = 0.005f; // positive because we are moving forward
+            movement_scale_factor = 0.003f; // positive because we are moving forward
 
     public MoveForwardActionKeyboard(MyGame game) {
         this.game = game;
