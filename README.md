@@ -22,11 +22,6 @@ Days/Times: MoWeFr 2:00PM - 2:50PM
   - [DEMO "HELLO, TAGE": Validate Your Setup Is In Proper Order](#demo-hello-tage-validate-your-setup-is-in-proper-order)
     - [Before](#before)
     - [After](#after)
-  - [Logitech F310 Wired Gamepad (Logitech Dual Action properties)](#logitech-f310-wired-gamepad-logitech-dual-action-properties)
-    - [Buttons](#buttons)
-    - [Thumb Sticks](#thumb-sticks)
-      - [Left thumb stick](#left-thumb-stick)
-      - [Right thumb stick](#right-thumb-stick)
   - [Problems that may occur during development](#problems-that-may-occur-during-development)
 
 ## Description: Computer Game Architecture and Implementation (3 Units)
@@ -106,7 +101,6 @@ If `CLASSPATH` System variable does not exist do the following:
    1. As in current directory
 3. Enter and then add the rest according to the document specified in: [introGuide.pdf](00-tage-game-engine/tage_build/introGuide.pdf)
 
-
 >C:\javagaming\jogl\jogl-all.jar
 >
 >C:\javagaming\jogl\gluegen-rt.jar
@@ -120,7 +114,6 @@ If `CLASSPATH` System variable does not exist do the following:
 >C:\javagaming\jbullet\jbullet.jar
 >
 >C:\javagaming\vecmath\vecmath.jar
-
 
 ![CLASSPATH ENVIRONMENT VARIABLES](_course_readme_assets/classpath_environment_variables.png)
 
@@ -175,7 +168,6 @@ The file simply compiles the following java code:
 >>
 >>javac tage\audio\joal\*.java
 
-
 ## DEMO "HELLO, TAGE": Validate Your Setup Is In Proper Order
 
 Run `HelloDolphin.java` found in Canvas or [instructor's website](https://athena.ecs.csus.edu/~gordonvs/)
@@ -204,44 +196,6 @@ different from initial copy and that of other classmates.
 - compile.bat
 - run.bat
 - zz-ABOUT.txt
-
-## [Logitech F310](https://www.logitechg.com/en-ph/products/gamepads/f310-gamepad.940-000112.html) Wired Gamepad (Logitech Dual Action properties)
-
-### Buttons
-
-- Button 01: X
-- Button 02: A
-- Button 03: B
-- Button 04: Y
-- Button 05: LB (left trigger front - L1)
-- Button 06: RB (right trigger front - R1)
-- Button 07: LT (left trigger back - L2)
-- Button 08: RT (right trigger back - R2)
-- Button 09: BACK (center left arrow)
-- Button 10: START (center right arrow)
-- Button 11: Left thumb stick (pressed-in)
-- Button 12: Right thumb stick (pressed-in)
-
-### Thumb Sticks
-
-#### Left thumb stick
-
-- X-Axis
-  - FULL TILT LEFT: 0
-  - FULL TILT RIGHT: 255
-- Y-Axis
-  - FULL TILT UP: 0 -> evt.value() = -1.0
-  - FULL TILT DOWN: 255 -> evt.value() = 1.0
-
-#### Right thumb stick
-
-- Z-Axis - right/left movement
-  - FULL TILT LEFT VALUE: 0
-  - FULL TILT RIGHT VALUE: 255
-
-- Z-Rotation - Up/down movement
-  - FULL TILT UP: 0
-  - FULL TILT DOWN: 255
 
 ## Problems that may occur during development
 
