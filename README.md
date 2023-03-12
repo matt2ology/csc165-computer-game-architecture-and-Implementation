@@ -8,6 +8,7 @@ Days/Times: MoWeFr 2:00PM - 2:50PM
 
 - [CSC 165: Computer Game Architecture and Implementation](#csc-165-computer-game-architecture-and-implementation)
   - [Description: Computer Game Architecture and Implementation (3 Units)](#description-computer-game-architecture-and-implementation-3-units)
+  - [Generate Javadocs](#generate-javadocs)
   - [TAGE Goals](#tage-goals)
     - [Making your own game](#making-your-own-game)
   - [Setup/Installation (assumes Java 11 JDK and JOGL 2.4)](#setupinstallation-assumes-java-11-jdk-and-jogl-24)
@@ -15,11 +16,17 @@ Days/Times: MoWeFr 2:00PM - 2:50PM
       - [3rd Party Library Dependency That TAGE Relies on](#3rd-party-library-dependency-that-tage-relies-on)
       - [System Variable Set-up](#system-variable-set-up)
         - [`CLASSPATH` Environment Variable Set-up](#classpath-environment-variable-set-up)
+        - [VS Code Reference Libraries setup paths](#vs-code-reference-libraries-setup-paths)
         - [`PATH` Environment Variable Set-up](#path-environment-variable-set-up)
     - [Compile TAGE](#compile-tage)
   - [DEMO "HELLO, TAGE": Validate Your Setup Is In Proper Order](#demo-hello-tage-validate-your-setup-is-in-proper-order)
     - [Before](#before)
     - [After](#after)
+  - [Logitech F310 Wired Gamepad (Logitech Dual Action properties)](#logitech-f310-wired-gamepad-logitech-dual-action-properties)
+    - [Buttons](#buttons)
+    - [Thumb Sticks](#thumb-sticks)
+      - [Left thumb stick](#left-thumb-stick)
+      - [Right thumb stick](#right-thumb-stick)
 
 ## Description: Computer Game Architecture and Implementation (3 Units)
 
@@ -34,6 +41,7 @@ music in games; optimization techniques; multi-player games and networking;
 game development tools and environments. Substantial programming and project work.
 
 ## Generate Javadocs
+
 WSL/Linux: $ `javadoc -d docs/ $(find . -name *.java)`
 
 ## TAGE Goals
@@ -109,7 +117,7 @@ C:\javagaming\vecmath\vecmath.jar
 
 ![CLASSPATH ENVIRONMENT VARIABLES](_course_readme_assets/classpath_environment_variables.png)
 
-##### VS Code Reference Libraries setup paths
+##### [VS Code Reference Libraries setup paths](https://code.visualstudio.com/docs/java/java-project)
 
 > "C:\javagaming\jogl\jogl-all.jar" "C:\javagaming\jogl\gluegen-rt.jar" "C:\javagaming\jogl\joal.jar" "C:\javagaming\joml\joml-1.10.0.jar" "C:\javagaming\jinput\jinput.jar" "C:\javagaming\jbullet\jbullet.jar" "C:\javagaming\vecmath\vecmath.jar"
 
@@ -208,7 +216,7 @@ different from initial copy and that of other classmates.
 - Z-Axis - right/left movement
   - FULL TILT LEFT VALUE: 0
   - FULL TILT RIGHT VALUE: 255
- 
+
 - Z-Rotation - Up/down movement
   - FULL TILT UP: 0
   - FULL TILT DOWN: 255
