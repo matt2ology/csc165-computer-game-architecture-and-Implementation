@@ -1,5 +1,6 @@
 package tage;
 import org.joml.*;
+import org.joml.Math;
 
 /**
 * A Camera specifies the rendering viewpoint for a Viewport.
@@ -131,5 +132,52 @@ public class Camera
 		if (isCameraInAvatarProximity) {
 			this.setLocation(newLocation);
 		}
+	}
+
+	/**
+	 * Pitches the camera up or down.
+	 * Positive values pitch up, negative values pitch down.
+	 * 
+	 * @param movement_speed
+	 * @author Matthew M.
+	 */
+	public void pitch(float movement_speed) {
+		Vector3f newU = new Vector3f(); // u' = u * cos(a) - n * sin(a)
+		Vector3f newV = new Vector3f(); // v' = v * cos(a) - n * sin(a)
+		Vector3f newN = new Vector3f(); // n' = u * sin(a) + n * cos(a)
+
+		newU = u; // u' = u
+		newV = v; // v' = v
+		newN = n; // n' = n
+
+		// u = u * cos(a) - v * sin(a)
+		newU = new Vector3f(u.x() * (float) Math.cos(movement_speed) - v.x() * (float) Math.sin(movement_speed),
+				u.y() * (float) Math.cos(movement_speed) - v.y() * (float) Math.sin(movement_speed),
+				u.z() * (float) Math.cos(movement_speed) - v.z() * (float) Math.sin(movement_speed));
+		// v = u * sin(a) + v * cos(a)
+		newV = new Vector3f(u.x() * (float) Math.sin(movement_speed) + v.x() * (float) Math.cos(movement_speed),
+				u.y() * (float) Math.sin(movement_speed) + v.y() * (float) Math.cos(movement_speed),
+				u.z() * (float) Math.sin(movement_speed) + v.z() * (float) Math.cos(movement_speed));
+		// n = u * sin(a) + n * cos(a)
+		newN = new Vector3f(u.x() * (float) Math.sin(movement_speed) + n.x() * (float) Math.cos(movement_speed),
+				u.y() * (float) Math.sin(movement_speed) + n.y() * (float) Math.cos(movement_speed),
+				u.z() * (float) Math.sin(movement_speed) + n.z() * (float) Math.cos(movement_speed));
+
+		u = newU; // u = u'
+		v = newV; // v = v'
+		n = newN; // n = n'
+
+		// normalize u, v, and n
+		u = u.normalize(); // u = u' / |u'|
+		v = v.normalize(); // v = v' / |v'|
+		n = n.normalize(); // n = n' / |n'|
+
+		// update the view matrix
+		viewR.set(u.x(), v.x(), -n.x(), 0.0f,
+				  u.y(), v.y(), -n.y(), 0.0f,
+				  u.z(), v.z(), -n.z(), 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+		view.identity();
+		view.mul(viewR);
+		view.mul(viewT);
 	}
 }
