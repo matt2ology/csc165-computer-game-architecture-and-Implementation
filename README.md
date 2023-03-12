@@ -183,7 +183,7 @@ different from initial copy and that of other classmates.
 - run.bat
 - zz-ABOUT.txt
 
-## Logitech F310 Wired Gamepad (Logitech Dual Action properties)
+## [Logitech F310](https://www.logitechg.com/en-ph/products/gamepads/f310-gamepad.940-000112.html) Wired Gamepad (Logitech Dual Action properties)
 
 ### Buttons
 
