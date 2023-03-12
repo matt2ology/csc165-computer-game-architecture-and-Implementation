@@ -107,11 +107,17 @@ If `CLASSPATH` System variable does not exist do the following:
 
 
 >C:\javagaming\jogl\jogl-all.jar
+>
 >C:\javagaming\jogl\gluegen-rt.jar
+>
 >C:\javagaming\jogl\joal.jar
+>
 >C:\javagaming\joml\joml-1.10.0.jar
+>
 >C:\javagaming\jinput\jinput.jar
+>
 >C:\javagaming\jbullet\jbullet.jar
+>
 >C:\javagaming\vecmath\vecmath.jar
 
 
@@ -141,18 +147,31 @@ The file simply compiles the following java code:
 
 >compile.bat
 >>javac tage\*.java
+>>
 >>javac tage\input\*.java
+>>
 >>javac tage\input\action\*.java
+>>
 >>javac tage\networking\*.java
+>>
 >>javac tage\networking\client\*.java
+>>
 >>javac tage\networking\server\*.java
+>>
 >>javac tage\nodeControllers\*.java
+>>
 >>javac tage\shapes\*.java
+>>
 >>javac tage\objectRenderers\*.java
+>>
 >>javac tage\physics\*.java
+>>
 >>javac tage\physics\JBullet\*.java
+>>
 >>javac tage\ai\behaviortrees\*.java
+>>
 >>javac tage\audio\*.java
+>>
 >>javac tage\audio\joal\*.java
 
 
