@@ -27,6 +27,7 @@ Days/Times: MoWeFr 2:00PM - 2:50PM
     - [Thumb Sticks](#thumb-sticks)
       - [Left thumb stick](#left-thumb-stick)
       - [Right thumb stick](#right-thumb-stick)
+  - [Problems that may occur during development](#problems-that-may-occur-during-development)
 
 ## Description: Computer Game Architecture and Implementation (3 Units)
 
@@ -241,3 +242,7 @@ different from initial copy and that of other classmates.
 - Z-Rotation - Up/down movement
   - FULL TILT UP: 0
   - FULL TILT DOWN: 255
+
+## Problems that may occur during development
+
+1. [Case-sensitive path collisions on case-insensitive file system when I do git clone](https://stackoverflow.com/questions/63468346/case-sensitive-path-collisions-on-case-insensitive-file-system-when-i-do-git-clo)
