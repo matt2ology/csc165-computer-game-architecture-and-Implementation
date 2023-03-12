@@ -41,7 +41,7 @@ public class MyGame extends VariableFrameRateGame {
 
 	/**
 	 * Photomode and/or freecam/flycam mode
-	 * - if true, the camera is not attached to the avatar
+	 * - if true, the camera is not attached to the avatar.
 	 */
 	private boolean freeCamMode = false;
 	private boolean paused = false;
