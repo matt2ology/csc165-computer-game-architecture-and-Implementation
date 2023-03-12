@@ -101,13 +101,17 @@ If `CLASSPATH` System variable does not exist do the following:
 C:\javagaming\jogl\jogl-all.jar
 C:\javagaming\jogl\gluegen-rt.jar
 C:\javagaming\jogl\joal.jar
-C:\javagaming\joml\joml-1.9.25.jar
+C:\javagaming\joml\joml-1.10.0.jar
 C:\javagaming\jinput\jinput.jar
 C:\javagaming\jbullet\jbullet.jar
 C:\javagaming\vecmath\vecmath.jar
 ```
 
 ![CLASSPATH ENVIRONMENT VARIABLES](_course_readme_assets/classpath_environment_variables.png)
+
+##### VS Code Reference Libraries setup paths
+
+> "C:\javagaming\jogl\jogl-all.jar" "C:\javagaming\jogl\gluegen-rt.jar" "C:\javagaming\jogl\joal.jar" "C:\javagaming\joml\joml-1.10.0.jar" "C:\javagaming\jinput\jinput.jar" "C:\javagaming\jbullet\jbullet.jar" "C:\javagaming\vecmath\vecmath.jar"
 
 ##### `PATH` Environment Variable Set-up
 
@@ -170,3 +174,41 @@ different from initial copy and that of other classmates.
 - compile.bat
 - run.bat
 - zz-ABOUT.txt
+
+## Logitech F310 Wired Gamepad (Logitech Dual Action properties)
+
+### Buttons
+
+- Button 01: X
+- Button 02: A
+- Button 03: B
+- Button 04: Y
+- Button 05: LB (left trigger front - L1)
+- Button 06: RB (right trigger front - R1)
+- Button 07: LT (left trigger back - L2)
+- Button 08: RT (right trigger back - R2)
+- Button 09: BACK (center left arrow)
+- Button 10: START (center right arrow)
+- Button 11: Left thumb stick (pressed-in)
+- Button 12: Right thumb stick (pressed-in)
+
+### Thumb Sticks
+
+#### Left thumb stick
+
+- X-Axis
+  - FULL TILT LEFT: 0
+  - FULL TILT RIGHT: 255
+- Y-Axis
+  - FULL TILT UP: 0 -> evt.value() = -1.0
+  - FULL TILT DOWN: 255 -> evt.value() = 1.0
+
+#### Right thumb stick
+
+- Z-Axis - right/left movement
+  - FULL TILT LEFT VALUE: 0
+  - FULL TILT RIGHT VALUE: 255
+ 
+- Z-Rotation - Up/down movement
+  - FULL TILT UP: 0
+  - FULL TILT DOWN: 255
