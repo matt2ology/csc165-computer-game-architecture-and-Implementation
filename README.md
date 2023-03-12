@@ -105,21 +105,23 @@ If `CLASSPATH` System variable does not exist do the following:
    1. As in current directory
 3. Enter and then add the rest according to the document specified in: [introGuide.pdf](00-tage-game-engine/tage_build/introGuide.pdf)
 
-```text
-C:\javagaming\jogl\jogl-all.jar
-C:\javagaming\jogl\gluegen-rt.jar
-C:\javagaming\jogl\joal.jar
-C:\javagaming\joml\joml-1.10.0.jar
-C:\javagaming\jinput\jinput.jar
-C:\javagaming\jbullet\jbullet.jar
-C:\javagaming\vecmath\vecmath.jar
-```
+
+>C:\javagaming\jogl\jogl-all.jar
+>C:\javagaming\jogl\gluegen-rt.jar
+>C:\javagaming\jogl\joal.jar
+>C:\javagaming\joml\joml-1.10.0.jar
+>C:\javagaming\jinput\jinput.jar
+>C:\javagaming\jbullet\jbullet.jar
+>C:\javagaming\vecmath\vecmath.jar
+
 
 ![CLASSPATH ENVIRONMENT VARIABLES](_course_readme_assets/classpath_environment_variables.png)
 
 ##### [VS Code Reference Libraries setup paths](https://code.visualstudio.com/docs/java/java-project)
 
-> "C:\javagaming\jogl\jogl-all.jar" "C:\javagaming\jogl\gluegen-rt.jar" "C:\javagaming\jogl\joal.jar" "C:\javagaming\joml\joml-1.10.0.jar" "C:\javagaming\jinput\jinput.jar" "C:\javagaming\jbullet\jbullet.jar" "C:\javagaming\vecmath\vecmath.jar"
+```text
+"C:\javagaming\jogl\jogl-all.jar" "C:\javagaming\jogl\gluegen-rt.jar" "C:\javagaming\jogl\joal.jar" "C:\javagaming\joml\joml-1.10.0.jar" "C:\javagaming\jinput\jinput.jar" "C:\javagaming\jbullet\jbullet.jar" "C:\javagaming\vecmath\vecmath.jar"
+```
 
 ##### `PATH` Environment Variable Set-up
 
@@ -137,22 +139,22 @@ Run the compileTAGE.bat located in the
 
 The file simply compiles the following java code:
 
-```bat
-javac tage\*.java
-javac tage\input\*.java
-javac tage\input\action\*.java
-javac tage\networking\*.java
-javac tage\networking\client\*.java
-javac tage\networking\server\*.java
-javac tage\nodeControllers\*.java
-javac tage\shapes\*.java
-javac tage\objectRenderers\*.java
-javac tage\physics\*.java
-javac tage\physics\JBullet\*.java
-javac tage\ai\behaviortrees\*.java
-javac tage\audio\*.java
-javac tage\audio\joal\*.java
-```
+>compile.bat
+>>javac tage\*.java
+>>javac tage\input\*.java
+>>javac tage\input\action\*.java
+>>javac tage\networking\*.java
+>>javac tage\networking\client\*.java
+>>javac tage\networking\server\*.java
+>>javac tage\nodeControllers\*.java
+>>javac tage\shapes\*.java
+>>javac tage\objectRenderers\*.java
+>>javac tage\physics\*.java
+>>javac tage\physics\JBullet\*.java
+>>javac tage\ai\behaviortrees\*.java
+>>javac tage\audio\*.java
+>>javac tage\audio\joal\*.java
+
 
 ## DEMO "HELLO, TAGE": Validate Your Setup Is In Proper Order
 
