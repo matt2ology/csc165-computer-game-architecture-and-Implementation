@@ -1,28 +1,26 @@
 package a1;
 
-import tage.*;
-import tage.input.InputManager; // tage.input is needed for input management (keyboard, mouse, gamepad, etc.)
-import tage.input.action.MoveBackwardActionKeyboard;
-import tage.input.action.MoveForwardActionKeyboard;
-import tage.input.action.MoveYawActionKeyboard;
-import tage.shapes.*;
-
-import java.lang.Math; // java.lang.Math is always needed for Math functions like sin, cos, etc.)
 import java.awt.*; // java.awt is almost always needed for graphics and GUI elements
 import java.awt.event.*; // java.awt.event is almost always needed for keyboard and mouse events and listeners
 import java.io.*; // java.io is almost always needed for file input and output
+import java.lang.Math; // java.lang.Math is always needed for Math functions like sin, cos, etc.)
+import java.util.ArrayList; // java.util.ArrayList is almost always needed for lists of objects
+import java.util.logging.Logger; // java.util.logging.Logger is always needed for logging
 import javax.swing.*; // javax.swing is almost always needed for GUI elements
-
-import java.util.ArrayList;
-import java.util.logging.Logger;
-
+import net.java.games.input.Controller; // net.java.games.input.Controller is always needed for gamepad input
 import org.joml.*; // org.joml is almost always needed for 3D math and transformations
 
-import net.java.games.input.Controller;
+import tage.*;
+import tage.input.action.MoveBackwardActionKeyboard;
+import tage.input.action.MoveForwardActionKeyboard;
+import tage.input.action.MovePitchDownActionKeyboard;
+import tage.input.action.MovePitchUpActionKeyboard;
+import tage.input.action.MoveYawActionKeyboard;
+import tage.input.InputManager; // tage.input is needed for input management (keyboard, mouse, gamepad, etc.)
+import tage.shapes.*;
 
 public class MyGame extends VariableFrameRateGame {
 	public static Logger logging = Logger.getLogger(MyGame.class.getName());
-
 	/**
 	 * 1000 milliseconds in one second. Used for converting between time units.
 	 */
@@ -57,7 +55,7 @@ public class MyGame extends VariableFrameRateGame {
 
 	/**
 	 * @return the average fps over the last 100 frames
-	 * @author Matt
+	 * @author Matthew M.
 	 */
 	public double getFpsAvg() {
 		return fpsAvg;
@@ -68,7 +66,7 @@ public class MyGame extends VariableFrameRateGame {
 	 * (or less if there are less than 100 frames)
 	 * 
 	 * @param fpsAvg
-	 * @author Matt
+	 * @author Matthew M.
 	 */
 	public void calculateAverageFPS() {
 		if (frameCounter < 100) {
@@ -104,18 +102,15 @@ public class MyGame extends VariableFrameRateGame {
 
 	public MyGame() {
 		super();
-
 		System.out.println("\n--------------------------------------------------");
 		System.out.println("press ESC or Button 4 (Y) to quit");
 		// Controls!
 		System.out.println("press W or Left Joystick to move forward");
 		System.out.println("press S or Left Joystick to move backward");
-		System.out.println("press A or Left Joystick to move left");
-		System.out.println("press D or Left Joystick to move right");
-		System.out.println("press Q or Right Joystick to yaw left");
-		System.out.println("press E or Right Joystick to yaw right");
-		System.out.println("press UP or Right Joystick to pitch up");
-		System.out.println("press DOWN or Right Joystick to pitch down");
+		System.out.println("press A or Right Joystick to yaw left");
+		System.out.println("press D or Right Joystick to yaw right");
+		System.out.println("press Q or Right Joystick to pitch up");
+		System.out.println("press E or Right Joystick to pitch down");
 		System.out.println("press SPACE or Button 2 (A) to hop on a nearby dolphin");
 		System.out.println("--------------------------------------------------");
 		System.err.println("FreeCam mode is " + (isInFreeCamMode() ? "ON" : "OFF"));
@@ -203,11 +198,13 @@ public class MyGame extends VariableFrameRateGame {
 
 		// ------------- Control Inputs -------------
 		inputManager = engine.getInputManager();
+		ArrayList<Controller> controllers = inputManager.getControllers(); // get all our controllers
 		MoveForwardActionKeyboard moveForward = new MoveForwardActionKeyboard(this);
 		MoveBackwardActionKeyboard moveBackward = new MoveBackwardActionKeyboard(this);
 		MoveYawActionKeyboard yawLeft = new MoveYawActionKeyboard(this, 0);
 		MoveYawActionKeyboard yawRight = new MoveYawActionKeyboard(this, 1);
-		ArrayList<Controller> controllers = inputManager.getControllers(); // get all our controllers
+		MovePitchUpActionKeyboard pitchUp = new MovePitchUpActionKeyboard(this);
+		MovePitchDownActionKeyboard pitchDown = new MovePitchDownActionKeyboard(this);
 
 		/*
 		 * Gamepad Logitech F310 - Controller: Logitech Dual Action - Type: Stick
@@ -227,44 +224,51 @@ public class MyGame extends VariableFrameRateGame {
 						net.java.games.input.Component.Identifier.Axis.X,
 						yawLeft,
 						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
-
+				// Y (left stick y-axis) = move backward
 				inputManager.associateAction(
 						controller,
-						net.java.games.input.Component.Identifier.Axis.RY,
+						net.java.games.input.Component.Identifier.Axis.Y,
 						moveBackward,
 						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
-
+				// RX (right stick x-axis) = yaw right
 				inputManager.associateAction(
 						controller,
 						net.java.games.input.Component.Identifier.Axis.RX,
 						yawRight,
 						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
-
 			} else if (controller.getType() == Controller.Type.KEYBOARD) {
+				// W = move forward
 				inputManager.associateActionWithAllKeyboards(
 						net.java.games.input.Component.Identifier.Key.W,
 						moveForward,
 						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
-
+				// A = move left - yaw left
 				inputManager.associateActionWithAllKeyboards(
 						net.java.games.input.Component.Identifier.Key.A,
 						yawLeft,
 						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
-
+				// S = move backward
 				inputManager.associateActionWithAllKeyboards(
 						net.java.games.input.Component.Identifier.Key.S,
 						moveBackward,
 						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
-
+				// D = move right - yaw right
 				inputManager.associateActionWithAllKeyboards(
 						net.java.games.input.Component.Identifier.Key.D,
 						yawRight,
 						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
+				// Q = pitch up
+				inputManager.associateActionWithAllKeyboards(
+						net.java.games.input.Component.Identifier.Key.Q,
+						pitchUp,
+						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
+				// E = pitch down
+				inputManager.associateActionWithAllKeyboards(
+						net.java.games.input.Component.Identifier.Key.E,
+						pitchDown,
+						InputManager.INPUT_ACTION_TYPE.REPEAT_WHILE_DOWN);
 			}
 		}
-
-		// Keyboard Controls (WASD) and (QE) for movement and rotation respectively
-
 	}
 
 	@Override
@@ -286,8 +290,20 @@ public class MyGame extends VariableFrameRateGame {
 		(engine.getHUDmanager()).setHUD1(dispStr1, hud1Color, 15, 15);
 		(engine.getHUDmanager()).setHUD2(dispStr2, hud2Color, 500, 15);
 
-		inputManager.update((float) (frameCounter / elapsTime)); // Continuously read user's input
+		// Used FPS because it is more stable than the delta time method
+		inputManager.update(getFramesPerSecond());
 		frameCounter++;
+	}
+
+	/**
+	 * Calculates the number of frames per second based on
+	 * the elapsed time and the number of frames rendered.
+	 * 
+	 * @author Matthew M.
+	 * @return The number of frames per second calculated
+	 */
+	private float getFramesPerSecond() {
+		return (float) (frameCounter / elapsTime);
 	}
 
 	@Override
@@ -310,7 +326,7 @@ public class MyGame extends VariableFrameRateGame {
 	}
 
 	/**
-	 * @author Matt
+	 * @author Matthew M.
 	 * @return The camera from the "MAIN" viewport
 	 */
 	public Camera getCameraMain() {
@@ -318,7 +334,7 @@ public class MyGame extends VariableFrameRateGame {
 	}
 
 	/**
-	 * @author Matt
+	 * @author Matthew M.
 	 * @param cameraMain The camera to be update the "MAIN" viewport's camera
 	 */
 	public void updateCameraMain(Camera cameraMain) {
@@ -326,7 +342,7 @@ public class MyGame extends VariableFrameRateGame {
 	}
 
 	/**
-	 * @author Matt
+	 * @author Matthew M.
 	 * @return the freeCam boolean value (true or false)
 	 */
 	public boolean isInFreeCamMode() {
@@ -336,7 +352,7 @@ public class MyGame extends VariableFrameRateGame {
 	/**
 	 * Toggles the freeCam boolean value to true or false
 	 * 
-	 * @author Matt
+	 * @author Matthew M.
 	 */
 	public void toggleFreeCam() {
 		logging.info("freeCamMode : " + freeCamMode);
@@ -347,7 +363,7 @@ public class MyGame extends VariableFrameRateGame {
 	}
 
 	/**
-	 * @author Matt
+	 * @author Matthew M.
 	 * @return the avatar GameObject (the "player"/"main character")
 	 */
 	public GameObject getAvatar() {
@@ -355,7 +371,7 @@ public class MyGame extends VariableFrameRateGame {
 	}
 
 	/**
-	 * @author Matt
+	 * @author Matthew M.
 	 * @param avatar GameObject to be set as the avatar:
 	 *               "player"/"main character"
 	 */
@@ -367,7 +383,7 @@ public class MyGame extends VariableFrameRateGame {
 	 * Position the camera behind the avatar (the "player"/"main character")
 	 * Based on freeCam boolean value (true or false)
 	 * 
-	 * @author Matt
+	 * @author Matthew M.
 	 */
 	public void positionCameraBehindAvatar() {
 		float distanceBehindTheAvatar = -4.5f;
@@ -390,7 +406,7 @@ public class MyGame extends VariableFrameRateGame {
 	 * Unbind/dismount the camera from the avatar (the "player"/"main character")
 	 * Based on freeCam boolean value (true or false)
 	 * 
-	 * @author Matt
+	 * @author Matthew M.
 	 */
 	public void unboundCameraFromAvatar() {
 		float dismountDistanceOff = -5f;
@@ -410,7 +426,7 @@ public class MyGame extends VariableFrameRateGame {
 	}
 
 	/**
-	 * @author Matt
+	 * @author Matthew M.
 	 * @return true if the camera is within the tether distance of the avatar
 	 * @see cameraDistanceFromAvatar
 	 */
