@@ -180,4 +180,45 @@ public class Camera
 		view.mul(viewR);
 		view.mul(viewT);
 	}
+
+	/**
+	 * Yaws the camera left or right.
+	 * @param movement_speed
+	 * @author Matthew M.
+	 */
+    public void yaw(float movement_speed) {
+		Vector3f newU = new Vector3f(); // u' = u * cos(a) - v * sin(a)
+		Vector3f newV = new Vector3f(); // v' = u * sin(a) + v * cos(a)
+		Vector3f newN = new Vector3f(); // n' = n
+
+		newU = u; // u' = u
+		newV = v; // v' = v
+		newN = n; // n' = n
+
+		// u = u * cos(a) - v * sin(a)
+		newU = new Vector3f(u.x() * (float) Math.cos(movement_speed) - v.x() * (float) Math.sin(movement_speed),
+				u.y() * (float) Math.cos(movement_speed) - v.y() * (float) Math.sin(movement_speed),
+				u.z() * (float) Math.cos(movement_speed) - v.z() * (float) Math.sin(movement_speed));
+		// v = u * sin(a) + v * cos(a)
+		newV = new Vector3f(u.x() * (float) Math.sin(movement_speed) + v.x() * (float) Math.cos(movement_speed),
+				u.y() * (float) Math.sin(movement_speed) + v.y() * (float) Math.cos(movement_speed),
+				u.z() * (float) Math.sin(movement_speed) + v.z() * (float) Math.cos(movement_speed));
+		
+		u = newU; // u = u'
+		v = newV; // v = v'
+		n = newN; // n = n'
+
+		// normalize u, v, and n
+		u = u.normalize(); // u = u' / |u'|
+		v = v.normalize(); // v = v' / |v'|
+		n = n.normalize(); // n = n' / |n'|
+
+		// update the view matrix
+		viewR.set(u.x(), v.x(), -n.x(), 0.0f,
+				  u.y(), v.y(), -n.y(), 0.0f,
+				  u.z(), v.z(), -n.z(), 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+		view.identity();
+		view.mul(viewR);
+		view.mul(viewT);
+    }
 }

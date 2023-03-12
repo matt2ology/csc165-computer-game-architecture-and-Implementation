@@ -1,4 +1,4 @@
-package myGame; // myGame is the name of the package for this game
+package MyGame; // MyGame is the name of the package for this game
 
 import tage.*; // TAGE is almost always needed for Engine, GameObject, etc.
 import tage.shapes.*; // tage.shapes is almost always needed for shapes (ObjShape, ImportedModel, etc.)
