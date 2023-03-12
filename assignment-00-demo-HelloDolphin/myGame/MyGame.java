@@ -1,4 +1,4 @@
-package myGame;
+package MyGame;
 
 import tage.*;
 import tage.shapes.*;
