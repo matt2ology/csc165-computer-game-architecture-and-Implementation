@@ -11,13 +11,13 @@ in the lookAt(float x, float y, float z) function,
 change:
 
 ```java
-     if (n.equals(0,1,0)) 
+if (n.equals(0,1,0)) 
 ```
 
 to:  
 
 ```java
-     if ((n.equals(0,1,0)) || (n.equals(0,-1,0)))
+if ((n.equals(0,1,0)) || (n.equals(0,-1,0)))
 ```
 
 ___
@@ -35,8 +35,8 @@ ___
 object that is passed to the `performAction()` method. For example:
 
 ```java
-     public void performAction(float time, Event e)
-     { if (e.getValue() < -0.1) etc...
+public void performAction(float time, Event e)
+{ if (e.getValue() < -0.1) etc...
 ```
 
 If the joystick was moved in the negative direction, `e.getValue()` would
@@ -51,14 +51,13 @@ The fix is simple. In the RenderSystem.java file,
 change:
 
 ```java
-     private HashMap< String, Viewport> viewportList = new HashMap<>(); 
+private HashMap< String, Viewport> viewportList = new HashMap<>(); 
 ```
 
 to:  
 
 ```java
-     private LinkedHashMap< String, Viewport> viewportList = new LinkedHashMap< String, Viewport>();
-  
+private LinkedHashMap< String, Viewport> viewportList = new LinkedHashMap< String, Viewport>();
 ```
 
 ___
